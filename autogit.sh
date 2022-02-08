@@ -1,4 +1,4 @@
 git add -A
-git commit -m "README.md & autogit.sh -> alts add"
+git commit -m "README.md -> alts add (again)"
 git push
 git status
