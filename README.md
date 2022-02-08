@@ -9,26 +9,47 @@
 > Table of Contents
 > 
 > ° Understanding Descriptive Statistics
+>
 >   ° Types of Measures
+>
 >   ° Population and Samples
+>
 >   ° Outliers
+>
 > ° Choosing Python Statistics Libraries
+>
 > ° Getting Started With Python Statistics Libraries
+>
 > ° Calculating Descriptive Statistics
+>
 >   ° Measures of Central Tendency
+>
 >   ° Measures of Variability
+>
 >   ° Summary of Descriptive Statistics
+>
 >   ° Measures of Correlation Between Pairs of Data
+>
 > ° Working With 2D Data
+>
 >   ° Axes
+>
 >   ° DataFrames
+>
 > ° Visualizing Data
+>
 >   ° Box Plots
+>
 >   ° Histograms
+>
 >   ° Pie Charts
+>
 >   ° Bar Charts
+>
 >   ° X-Y Plots
+>
 >   ° Heatmaps
+>
 > ° Conclusion
 
 
@@ -37,6 +58,9 @@ In the era of big data and [artificial intelligence](https://realpython.com/pyth
 **In this tutorial, you’ll learn:**
 
 ° What **numerical quantities** you can use to describe and summarize your datasets
+
 ° How to **calculate** descriptive statistics in pure Python
+
 ° How to get **descriptive statistics** with available Python libraries
+
 ° How to **visualize** your datasets
