@@ -1,4 +1,4 @@
 git add -A
-git commit -m "README.md -> alts add (again)"
+git commit -m "README.md -> Table of Content: fixed (finally)"
 git push
 git status
