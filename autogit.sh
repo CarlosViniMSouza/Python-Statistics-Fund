@@ -1,4 +1,4 @@
 git add -A
-git commit -m "README.md -> Table of Content: fixed (finally)"
+git commit -m "Next Sub-Topic: Types of Measures"
 git push
 git status
