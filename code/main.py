@@ -19,6 +19,9 @@ print(math.isnan(np.nan), np.isnan(math.nan))
 print(math.isnan(x_with_nan[3]), np.isnan(x_with_nan[3]))
 # output: True True
 
+y, y_with_nan = np.array(x_list), np.array(x_with_nan)
+z, z_with_nan = pd.Series(x_list), pd.Series(x_with_nan)
+
 mean = sum(x_list) / len(x_list)
 print(mean)
 # output: 8.7
@@ -30,3 +33,25 @@ print(mean)
 mean = statistics.fmean(x_list)
 print(mean)
 # output: 8.7
+
+mean = statistics.mean(x_with_nan)
+print(mean)
+# output: nan
+
+mean = statistics.fmean(x_with_nan)
+print(mean)
+# output: nan
+
+mean = np.mean(y)
+print(mean)
+# output: 8.7
+
+mean = y.mean()
+print(mean)
+# output: 8.7
+
+print(np.mean(y_with_nan))
+# output: nan
+
+print(y_with_nan.mean())
+# output: nan

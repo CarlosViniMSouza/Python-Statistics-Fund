@@ -228,3 +228,45 @@ mean = statistics.fmean(x_list)
 print(mean)
 # output: 8.7
 ```
+
+Você chamou as funções [mean()](https://docs.python.org/3/library/statistics.html#statistics.mean) e [fmean()](https://docs.python.org/3/library/statistics.html#statistics.fmean) da biblioteca de `estatísticas` interna do Python e obteve o mesmo resultado que obteve com o Python puro. `fmean()` é introduzido no [Python 3.8](https://realpython.com/python38-new-features/) como uma alternativa mais rápida para `mean()`. Ele sempre retorna um número de ponto flutuante.
+
+No entanto, se houver valores nan entre seus dados, `statistics.mean()` e `statistics.fmean()` retornará nan como saída:
+
+```python
+mean = statistics.mean(x_with_nan)
+mean
+# output: nan
+
+mean = statistics.fmean(x_with_nan)
+mean
+# output: nan
+```
+
+Este resultado é consistente com o comportamento de sum(), porque sum(x_with_nan) também retorna `nan`.
+
+Se você usar o NumPy, poderá obter a média com [np.mean()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html):
+
+```python
+mean = np.mean(y)
+mean
+# output: 8.7
+```
+
+No exemplo acima, mean() é uma função, mas você também pode usar o método correspondente [.mean()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.mean.html):
+
+```python
+mean = y.mean()
+mean
+# output: 8.7
+```
+
+A função `mean()` e o método `.mean()` de NumPy retornam o mesmo resultado que `statistics.mean()`. Este também é o caso quando há valores nan entre seus dados:
+
+```python
+np.mean(y_with_nan)
+# output: nan
+
+y_with_nan.mean()
+# output: nan
+```
