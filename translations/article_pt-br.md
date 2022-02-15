@@ -55,3 +55,41 @@ Existem muitas bibliotecas de estatísticas Python para você trabalhar, mas nes
 ° [**Matplotlib**](https://matplotlib.org/) é uma biblioteca de terceiros para visualização de dados. Funciona bem em combinação com NumPy, SciPy e Pandas.
 
 Observe que, em muitos casos, objetos Series e [DataFrame](https://realpython.com/pandas-dataframe/) podem ser usados no lugar de arrays NumPy. Muitas vezes, você pode simplesmente passá-los para uma função estatística NumPy ou [SciPy](https://realpython.com/python-scipy-cluster-optimize/). Além disso, você pode obter os dados não rotulados de um Series ou DataFrame como um objeto np.ndarray chamando [.values](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.values.html) ou [.to_numpy()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html).
+
+## Introdução às bibliotecas de estatísticas do Python:
+
+A biblioteca de `estatísticas` embutida do Python possui um número relativamente pequeno das funções estatísticas mais importantes. A [documentação oficial](https://docs.python.org/3/library/statistics.html) é um recurso valioso para encontrar os detalhes. Se você está limitado ao Python puro, a biblioteca de `estatísticas` do Python pode ser a escolha certa.
+
+Um bom lugar para começar a aprender sobre o NumPy é o [Guia do Usuário](https://docs.scipy.org/doc/numpy/user/index.html) oficial, especialmente as seções de [início rápido](https://docs.scipy.org/doc/numpy/user/quickstart.html) e [básico](https://docs.scipy.org/doc/numpy/user/basics.html). A [referência oficial](https://docs.scipy.org/doc/numpy/reference/) pode ajudá-lo a refrescar sua memória em conceitos específicos do NumPy. Enquanto você lê este tutorial, você pode querer verificar a seção de [estatísticas](https://docs.scipy.org/doc/numpy/reference/routines.statistics.html) e a [referência oficial do scipy.stats](https://docs.scipy.org/doc/scipy/reference/stats.html) também.
+
+> **Obs**:
+> 
+> Para saber mais sobre o NumPy, confira estes recursos:
+> 
+>   ° [Look Ma, sem For-Loops: programação de matrizes com NumPy](https://realpython.com/numpy-array-programming/)
+>   ° [Limpeza de dados Pythonic com Pandas e NumPy](https://realpython.com/python-data-cleaning-numpy-pandas/)
+>   ° [NumPy arange(): Como usar np.arange()](https://realpython.com/how-to-use-numpy-arange/)
+
+Se você quiser aprender Pandas, a [página oficial de Introdução](https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html) é um excelente lugar para começar. A [introdução às estruturas de dados](https://pandas.pydata.org/pandas-docs/stable/getting_started/dsintro.html) pode ajudá-lo a aprender sobre os tipos de dados fundamentais, `Series` e `DataFrame`. Da mesma forma, o excelente [tutorial introdutório oficial](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html) visa fornecer informações suficientes para começar a usar efetivamente o Pandas na prática.
+
+> **Obs**:
+> 
+> Para saber mais sobre o Pandas, confira estes recursos:
+> 
+>   ° [Usando Pandas e Python para explorar seu conjunto de dados](https://realpython.com/pandas-python-explore-dataset/)
+>   ° [Pandas DataFrames 101](https://realpython.com/courses/pandas-dataframes-101/)
+>   ° [Pandas idiomáticos: truques e recursos que você talvez não conheça](https://realpython.com/courses/idiomatic-pandas-tricks-features-you-may-not-know/)
+>   ° [Rápido, flexível, fácil e intuitivo: como acelerar seus projetos de pandas](https://realpython.com/fast-flexible-pandas/)
+
+O `matplotlib` possui um [Guia do Usuário oficial](https://matplotlib.org/users/index.html) abrangente que você pode usar para mergulhar nos detalhes do uso da biblioteca. [Anatomia do Matplotlib](https://github.com/matplotlib/AnatomyOfMatplotlib) é um excelente recurso para iniciantes que desejam começar a trabalhar com o `matplotlib` e suas bibliotecas relacionadas.
+
+> Obs:
+> 
+> Para saber mais sobre visualização de dados, confira estes recursos:
+> 
+>   ° [Python Plotando com Matplotlib (Guia)](https://realpython.com/python-matplotlib-guide/)
+>   ° [Plotagem de histograma Python: NumPy, Matplotlib, Pandas e Seaborn](https://realpython.com/python-histograms/)
+>   ° [Visualização de dados interativa em Python com Bokeh](https://realpython.com/python-data-visualization-bokeh/)
+>   ° [Plot com Pandas: Visualização de Dados Python para Iniciantes](https://realpython.com/pandas-plot-python/)
+
+Vamos começar a usar essas bibliotecas de estatísticas do Python!

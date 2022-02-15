@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Next Topic: Getting Started With Python Statistics Libraries"
+git commit -m "Next Topic: Calculating Descriptive Statistics"
 git push
 git status
