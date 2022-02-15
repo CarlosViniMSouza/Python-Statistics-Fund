@@ -55,3 +55,6 @@ print(np.mean(y_with_nan))
 
 print(y_with_nan.mean())
 # output: nan
+
+print(np.nanmean(y_with_nan))
+# uotput: 8.7

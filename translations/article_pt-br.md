@@ -270,3 +270,12 @@ np.mean(y_with_nan)
 y_with_nan.mean()
 # output: nan
 ```
+
+Muitas vezes, você não precisa obter um valor `nan` como resultado. Se você preferir ignorar os valores `nan`, então você pode usar [`np.nanmean()`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmean.html):
+
+```python
+np.nanmean(y_with_nan)
+# uotput: 8.7
+```
+
+`nanmean()` simplesmente ignora todos os valores `nan`. Ele retorna o mesmo valor que `mean()` se você o aplicasse ao conjunto de dados sem os valores `nan`.
