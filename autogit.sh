@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Next Sub-Topic: Measures of Central Tendency | error in Update projetc for Github (cause: internet)"
+git commit -m "Sub-Topic: Measures of Central Tendency - Part1 -> add"
 git push
 git status

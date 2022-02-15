@@ -94,7 +94,7 @@ O `matplotlib` possui um [Guia do Usuário oficial](https://matplotlib.org/users
 
 Vamos começar a usar essas bibliotecas de estatísticas do Python!
 
-## Calculando Estatísticas Descritivas
+## Calculando Estatísticas Descritivas:
 
 Comece importando todos os pacotes que você vai precisar:
 
@@ -185,3 +185,46 @@ Agora você tem dois arrays NumPy (y e y_with_nan) e dois Pandas Series (`z e z_
 > **NOTA**: embora você use [listas](https://realpython.com/python-lists-tuples/) ao longo deste tutorial, lembre-se de que, na maioria dos casos, você pode usar [tuplas](https://realpython.com/python-lists-tuples/) da mesma maneira.
 
 Você pode opcionalmente especificar um rótulo para cada valor em `z e z_with_nan`.
+
+### Medidas de tendência central:
+
+As medidas de tendência central mostram os valores centrais ou médios dos conjuntos de dados. Existem várias definições do que é considerado o centro de um conjunto de dados. Neste tutorial, você aprenderá a identificar e calcular essas medidas de tendência central:
+
+>   ° Significar
+>   ° Média ponderada
+>   ° Média geométrica
+>   ° média harmônica
+>   ° Mediana
+>   ° Modo
+
+° Significar
+
+A **média amostral**, também chamada de **média aritmética amostral** ou simplesmente **média**, é a média aritmética de todos os itens em um conjunto de dados. A média de um conjunto de dados 𝑥 é expressa matematicamente como `Σᵢ𝑥ᵢ/𝑛`, onde `𝑖 = 1, 2, …, 𝑛`. Em outras palavras, é a soma de todos os elementos `𝑥ᵢ` dividido pelo número de itens no conjunto de dados 𝑥.
+
+Esta figura ilustra a média de uma amostra com cinco pontos de dados:
+
+![img1](https://files.realpython.com/media/py-stats-01.3254dbfe6b9a.png)
+
+Os pontos verdes representam os pontos de dados 1, 2,5, 4, 8 e 28. A linha tracejada vermelha é a média, ou (1 + 2,5 + 4 + 8 + 28) / 5 = 8,7.
+
+Você pode calcular a média com Python puro usando [sum()](https://docs.python.org/3/library/functions.html#sum) e [len()](https://docs.python.org/3/library/functions.html#len), sem importar bibliotecas:
+
+```python
+import statistics
+
+mean = sum(x_list) / len(x_list)
+print(mean)
+# output: 8.7
+```
+
+Embora isso seja limpo e elegante, você também pode aplicar funções estatísticas internas do Python:
+
+```python
+mean = statistics.mean(x_list)
+print(mean)
+# output: 8.7
+
+mean = statistics.fmean(x_list)
+print(mean)
+# output: 8.7
+```
