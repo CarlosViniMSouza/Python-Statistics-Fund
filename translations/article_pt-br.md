@@ -144,3 +144,44 @@ Agora você tem as listas `x_list` e `x_with_nan`. Eles são quase os mesmos, co
 > Você pode ver que as funções são todas equivalentes. No entanto, lembre-se de que comparar dois valores `nan` para igualdade retorna `False`. Em outras palavras, `math.nan == math.nan` é `False`!
 
 Agora, crie objetos np.ndarray e pd.Series que correspondam a x e x_with_nan:
+
+```python
+y, y_with_nan = np.array(x), np.array(x_with_nan)
+z, z_with_nan = pd.Series(x), pd.Series(x_with_nan)
+y
+# Output: array([ 8. ,  1. ,  2.5, 4. , 28. ])
+
+y_with_nan
+# Output: array([ 8. ,  1. ,  2.5,  nan,  4. , 28. ])
+
+z
+"""
+Output: 
+
+0     8.0
+1     1.0
+2     2.5
+3     4.0
+4    28.0
+dtype: float64
+"""
+
+z_with_nan
+"""
+Output: 
+
+0     8.0
+1     1.0
+2     2.5
+3     NaN
+4     4.0
+5    28.0
+dtype: float64
+"""
+```
+
+Agora você tem dois arrays NumPy (y e y_with_nan) e dois Pandas Series (`z e z_with_nan`). Todos estes são sequências 1D de valores.
+
+> **NOTA**: embora você use [listas](https://realpython.com/python-lists-tuples/) ao longo deste tutorial, lembre-se de que, na maioria dos casos, você pode usar [tuplas](https://realpython.com/python-lists-tuples/) da mesma maneira.
+
+Você pode opcionalmente especificar um rótulo para cada valor em `z e z_with_nan`.
