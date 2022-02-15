@@ -93,3 +93,54 @@ O `matplotlib` possui um [Guia do Usuário oficial](https://matplotlib.org/users
 >   ° [Plot com Pandas: Visualização de Dados Python para Iniciantes](https://realpython.com/pandas-plot-python/)
 
 Vamos começar a usar essas bibliotecas de estatísticas do Python!
+
+## Calculando Estatísticas Descritivas
+
+Comece importando todos os pacotes que você vai precisar:
+
+```python
+import math
+import statistics
+import numpy as np
+import scipy.stats
+import pandas as pd
+```
+
+Estes são todos os pacotes que você precisará para cálculos de estatísticas do Python. Normalmente, você não usará o pacote `matemático` integrado do Python, mas será útil neste tutorial. Mais tarde, você importará `matplotlib.pyplot` para visualização de dados.
+
+Vamos criar alguns dados para trabalhar. Você começará com listas Python que contêm alguns dados numéricos arbitrários:
+
+```python
+x_list = [8.0, 1, 2.5, 4, 28.0]
+x_with_nan = [8.0, 1, 2.5, math.nan, 4, 28.0]
+
+x_list
+# Output: [8.0, 1, 2.5, 4, 28.0]
+
+x_with_nan
+# Output: [8.0, 1, 2.5, nan, 4, 28.0]
+```
+
+Agora você tem as listas `x_list` e `x_with_nan`. Eles são quase os mesmos, com a diferença de que x_with_nan contém um valor nan. É importante entender o comportamento das rotinas de estatísticas do Python quando elas se deparam com um [valor não numérico (nan)](https://en.wikipedia.org/wiki/NaN). Na ciência de dados, os valores ausentes são comuns e você geralmente os substitui por `nan`.
+
+> **Nota**: Como você obtém um valor nan?
+> 
+> Em Python, você pode usar qualquer um dos seguintes:
+> 
+>   ° float('nan')
+>   ° math.nan
+>   ° np.nan
+> 
+> Você pode usar todas essas funções de forma intercambiável:
+> 
+> ```python
+> math.isnan(np.nan), np.isnan(math.nan)
+> # output: (True, True)
+> 
+> math.isnan(y_with_nan[3]), np.isnan(y_with_nan[3])
+> # output: (True, True)
+> ```
+> 
+> Você pode ver que as funções são todas equivalentes. No entanto, lembre-se de que comparar dois valores `nan` para igualdade retorna `False`. Em outras palavras, `math.nan == math.nan` é `False`!
+
+Agora, crie objetos np.ndarray e pd.Series que correspondam a x e x_with_nan:
