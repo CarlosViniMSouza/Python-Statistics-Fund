@@ -58,3 +58,35 @@ print(y_with_nan.mean())
 
 print(np.nanmean(y_with_nan))
 # uotput: 8.7
+
+print(0.2 * 2 + 0.5 * 4 + 0.3 * 8)
+# output: 4.8
+
+x = [8.0, 1, 2.5, 4, 28.0]
+w = [0.1, 0.2, 0.3, 0.25, 0.15]
+
+w_mean = sum(w[i] * x[i] for i in range(len(x))) / sum(w)
+print(w_mean)
+
+# Other way:
+w_mean = sum(x_ * w_ for (x_, w_) in zip(x, w)) / sum(w)
+print(w_mean)
+
+w, y, z = np.array(w), np.array(x), pd.Series(x)
+w_mean = np.average(y, weights=w)
+print(w_mean)
+# output: 6.95
+
+w_mean = np.average(z, weights=w)
+print(w_mean)
+# output: 6.95
+
+w = np.array([0.1, 0.2, 0.3, 0.0, 0.2, 0.1])
+print((w * y_with_nan).sum() / w.sum())
+# output: nan
+
+print(np.average(y_with_nan, weights=w))
+# output: nan
+
+print(np.average(z_with_nan, weights=w))
+# output: nan

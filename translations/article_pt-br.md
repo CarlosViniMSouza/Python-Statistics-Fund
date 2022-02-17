@@ -114,10 +114,10 @@ Vamos criar alguns dados para trabalhar. Você começará com listas Python que 
 x_list = [8.0, 1, 2.5, 4, 28.0]
 x_with_nan = [8.0, 1, 2.5, math.nan, 4, 28.0]
 
-x_list
+print(x_list)
 # Output: [8.0, 1, 2.5, 4, 28.0]
 
-x_with_nan
+print(x_with_nan)
 # Output: [8.0, 1, 2.5, nan, 4, 28.0]
 ```
 
@@ -151,10 +151,10 @@ z, z_with_nan = pd.Series(x), pd.Series(x_with_nan)
 y
 # Output: array([ 8. ,  1. ,  2.5, 4. , 28. ])
 
-y_with_nan
+print(y_with_nan)
 # Output: array([ 8. ,  1. ,  2.5,  nan,  4. , 28. ])
 
-z
+print(z)
 """
 Output: 
 
@@ -166,7 +166,7 @@ Output:
 dtype: float64
 """
 
-z_with_nan
+print(z_with_nan)
 """
 Output: 
 
@@ -235,11 +235,11 @@ No entanto, se houver valores nan entre seus dados, `statistics.mean()` e `stati
 
 ```python
 mean = statistics.mean(x_with_nan)
-mean
+print(mean)
 # output: nan
 
 mean = statistics.fmean(x_with_nan)
-mean
+print(mean)
 # output: nan
 ```
 
@@ -249,7 +249,7 @@ Se você usar o NumPy, poderá obter a média com [np.mean()](https://docs.scipy
 
 ```python
 mean = np.mean(y)
-mean
+print(mean)
 # output: 8.7
 ```
 
@@ -257,25 +257,95 @@ No exemplo acima, mean() é uma função, mas você também pode usar o método 
 
 ```python
 mean = y.mean()
-mean
+print(mean)
 # output: 8.7
 ```
 
 A função `mean()` e o método `.mean()` de NumPy retornam o mesmo resultado que `statistics.mean()`. Este também é o caso quando há valores nan entre seus dados:
 
 ```python
-np.mean(y_with_nan)
+print(np.mean(y_with_nan))
 # output: nan
 
-y_with_nan.mean()
+print(y_with_nan.mean())
 # output: nan
 ```
 
 Muitas vezes, você não precisa obter um valor `nan` como resultado. Se você preferir ignorar os valores `nan`, então você pode usar [`np.nanmean()`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmean.html):
 
 ```python
-np.nanmean(y_with_nan)
-# uotput: 8.7
+print(np.nanmean(y_with_nan))
+# output: 8.7
 ```
 
 `nanmean()` simplesmente ignora todos os valores `nan`. Ele retorna o mesmo valor que `mean()` se você o aplicasse ao conjunto de dados sem os valores `nan`.
+
+## Média Ponderada
+
+A **média ponderada**, também chamada de **média aritmética ponderada** ou **média ponderada**, é uma generalização da média aritmética que permite definir a contribuição relativa de cada ponto de dados para o resultado.
+
+Você define um **peso 𝑤ᵢ** para cada ponto de dados 𝑥ᵢ do conjunto de dados 𝑥, onde 𝑖 = 1, 2, …, 𝑛 e 𝑛 é o número de itens em 𝑥. Em seguida, você multiplica cada ponto de dados pelo peso correspondente, soma todos os produtos e divide a soma obtida pela soma dos pesos: Σᵢ(𝑤ᵢ𝑥ᵢ) / Σᵢ𝑤ᵢ.
+
+> **Nota**: É conveniente (e geralmente o caso) que todos os pesos sejam **não negativos**, 𝑤ᵢ ≥ 0, e que sua soma seja igual a um, ou Σᵢ𝑤ᵢ = 1.
+
+A média ponderada é muito útil quando você precisa da média de um conjunto de dados contendo itens que ocorrem com determinadas frequências relativas. Por exemplo, digamos que você tenha um conjunto no qual 20% de todos os itens sejam iguais a 2, 50% dos itens sejam iguais a 4 e os 30% restantes dos itens sejam iguais a 8. Você pode calcular a média de um conjunto como este:
+
+```python
+print(0.2 * 2 + 0.5 * 4 + 0.3 * 8)
+# output: 4.8
+```
+
+Aqui, você leva em consideração as frequências com os pesos. Com esse método, você não precisa saber o número total de itens.
+
+Você pode implementar a média ponderada em Python puro combinando `sum()` com [range()](https://realpython.com/courses/python-range-function/) ou [zip()](https://realpython.com/python-zip-function/):
+
+```python
+x = [8.0, 1, 2.5, 4, 28.0]
+w = [0.1, 0.2, 0.3, 0.25, 0.15]
+
+w_mean = sum(w[i] * x[i] for i in range(len(x))) / sum(w)
+print(w_mean)
+
+# Other way:
+w_mean = sum(x_ * w_ for (x_, w_) in zip(x, w)) / sum(w)
+print(w_mean)
+```
+Novamente, esta é uma implementação limpa e elegante onde você não precisa importar nenhuma biblioteca.
+
+No entanto, se você tiver grandes conjuntos de dados, o NumPy provavelmente fornecerá uma solução melhor. Você pode usar [np.average()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.average.html) para obter a média ponderada de arrays NumPy ou Pandas `Series`:
+
+```python
+w, y, z = np.array(w), np.array(x), pd.Series(x)
+w_mean = np.average(y, weights=w)
+print(w_mean)
+# output: 6.95
+
+w_mean = np.average(z, weights=w)
+print(w_mean)
+# output: 6.95
+```
+O resultado é o mesmo que no caso da implementação pura do Python. Você também pode usar esse método em listas e tuplas comuns.
+
+Outra solução é usar o produto elementar `w * y` com [np.sum()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html) ou [.sum()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.sum.html):
+
+```python
+print((w * y).sum() / w.sum())
+# output: 6.95
+```
+
+É isso! Você calculou a média ponderada.
+
+No entanto, tenha cuidado se seu conjunto de dados contiver valores `nan`:
+
+```python
+w = np.array([0.1, 0.2, 0.3, 0.0, 0.2, 0.1])
+print((w * y_with_nan).sum() / w.sum())
+# output: nan
+
+print(np.average(y_with_nan, weights=w))
+# output: nan
+
+print(np.average(z_with_nan, weights=w))
+# output: nan
+```
+Nesse caso, `average()` retorna `nan`, que é consistente com `np.mean()`.
