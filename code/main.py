@@ -90,3 +90,19 @@ print(np.average(y_with_nan, weights=w))
 
 print(np.average(z_with_nan, weights=w))
 # output: nan
+
+h_mean = len(x) / sum(1 / item for item in x)
+print(h_mean)
+# output: 2.7613412228796843
+
+statistics.harmonic_mean(x_with_nan)
+# output: nan
+
+statistics.harmonic_mean([1, 0, 2])
+# output: 0
+
+scipy.stats.hmean(y)
+# output: 2.7613412228796843
+
+scipy.stats.hmean(z)
+# output: 2.7613412228796843

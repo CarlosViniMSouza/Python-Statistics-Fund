@@ -349,3 +349,40 @@ print(np.average(z_with_nan, weights=w))
 # output: nan
 ```
 Nesse caso, `average()` retorna `nan`, que é consistente com `np.mean()`.
+
+## Média Harmônica:
+
+A **média harmônica** é a recíproca da média das recíprocas de todos os itens no conjunto de dados: 𝑛 / Σᵢ(1/𝑥ᵢ), onde 𝑖 = 1, 2, …, 𝑛 e 𝑛 é o número de itens no conjunto de dados 𝑥. Uma variante da implementação Python pura da média harmônica é esta:
+
+```python
+h_mean = len(x) / sum(1 / item for item in x)
+print(h_mean)
+# output: 2.7613412228796843
+```
+
+O exemplo acima mostra uma implementação de `statistics.harmonic_mean()`. Se você tiver um valor `nan` em um conjunto de dados, ele retornará `nan`. Se houver pelo menos um 0, ele retornará 0. Se você fornecer pelo menos um número negativo, receberá [statistics.StatisticsError](https://docs.python.org/3/library/statistics.html#statistics.StatisticsError):
+
+```python
+statistics.harmonic_mean(x_with_nan)
+# output: nan
+
+statistics.harmonic_mean([1, 0, 2])
+# output: 0
+
+statistics.harmonic_mean([1, 0, -2])
+# output: Raises StatisticsError
+```
+
+Lembre-se desses três cenários ao usar esse método!
+
+Uma terceira maneira de calcular a média harmônica é usar [scipy.stats.hmean()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.hmean.html):
+
+```python
+scipy.stats.hmean(y)
+# output: 2.7613412228796843
+
+scipy.stats.hmean(z)
+# output: 2.7613412228796843
+```
+
+Novamente, esta é uma implementação bastante simples. No entanto, se seu conjunto de dados contiver nan, 0, um número negativo ou qualquer coisa menos números [positivos](https://realpython.com/python-numbers/), você receberá um [ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)!
