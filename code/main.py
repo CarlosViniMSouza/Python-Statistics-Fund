@@ -128,3 +128,33 @@ print(scipy.stats.gmean(y))
 
 print(scipy.stats.gmean(z))
 # output: 4.67788567485604
+
+n = len(x)
+if n % 2:
+    median = sorted(x)[round(0.5 * (n - 1))]
+else:
+    x_ord, index = sorted(x), round(0.5 * n)
+    median = 0.5 * (x_ord[index - 1] + x_ord[index])
+
+print(median)
+# output: 4
+
+median = statistics.median(x)
+print(median)
+# output: 4
+
+median = statistics.median(x[:-1])
+print(median)
+# output: 3.25
+
+statistics.median_low(x[:-1])
+# output: 2.5
+
+statistics.median_low(x[:-1])
+# output: 4
+
+print(z.median())
+# output: 4.0
+
+print(z_with_nan.median())
+# output: 4.0

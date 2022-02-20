@@ -387,11 +387,11 @@ scipy.stats.hmean(z)
 
 Novamente, esta é uma implementação bastante simples. No entanto, se seu conjunto de dados contiver `nan`, 0, um número negativo ou qualquer coisa menos números [positivos](https://realpython.com/python-numbers/), você receberá um [ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)!
 
-## Média Geomátrica:
+## Média Geométrica:
 
 A **média geométrica** é a 𝑛-ésima raiz do produto de todos os 𝑛 elementos 𝑥ᵢ em um conjunto de dados 𝑥: ⁿ√(Πᵢ𝑥ᵢ), onde 𝑖 = 1, 2, …, 𝑛. A figura a seguir ilustra as médias aritméticas, harmônicas e geométricas de um conjunto de dados:
 
-![img2](https://files.realpython.com/media/py-stats-02.ec1ca0f9a9ac.png)
+![img1](https://files.realpython.com/media/py-stats-02.ec1ca0f9a9ac.png)
 
 Novamente, os pontos verdes representam os pontos de dados 1, 2,5, 4, 8 e 28. A linha tracejada vermelha é a média. A linha tracejada azul é a média harmônica e a linha tracejada amarela é a média geométrica.
 
@@ -443,3 +443,91 @@ Você obteve o mesmo resultado com a implementação pura do Python.
 Se você tiver valores `nan` em um conjunto de dados, `gmean()` retornará `nan`. Se houver pelo menos um 0, ele retornará 0.0 e dará um aviso. Se você fornecer pelo menos um número negativo, receberá `nan` e o aviso.
 
 ## Mediana
+
+A **mediana da amostra** é o elemento central de um conjunto de dados classificado. O conjunto de dados pode ser classificado em ordem crescente ou decrescente. Se o número de elementos 𝑛 do conjunto de dados for ímpar, então a mediana é o valor na posição do meio: 0,5(𝑛 + 1). Se 𝑛 for par, então a mediana é a média aritmética dos dois valores no meio, ou seja,
+os itens nas posições 0,5𝑛 e 0,5𝑛 + 1.
+
+Por exemplo, se você tiver os pontos de dados 2, 4, 1, 8 e 9, o valor mediano será 4, que está no meio do conjunto de dados classificado (1, 2, 4, 8, 9). Se os pontos de dados são 2, 4, 1 e 8, então a mediana é 3, que é a média dos dois elementos centrais da sequência ordenada (2 e 4). A figura a seguir ilustra isso:
+
+![img1](https://files.realpython.com/media/py-stats-04.f7b39a21dd2d.png)
+
+Os pontos de dados são os pontos verdes e as linhas roxas mostram a mediana para cada conjunto de dados. O valor médio do conjunto de dados superior (1, 2.5, 4, 8 e 28) é 4. Se você remover o valor discrepante 28 do conjunto de dados inferior, a mediana se tornará a média aritmética entre 2.5 e 4, que é 3.25.
+
+A figura abaixo mostra a média e a mediana dos pontos de dados 1, 2.5, 4, 8 e 28:
+
+![img2](https://files.realpython.com/media/py-stats-03.33356e86aa97.png)
+
+Novamente, a média é a linha tracejada vermelha, enquanto a mediana é a linha roxa.
+
+A principal diferença entre o comportamento da média e da mediana está relacionada aos **outliers** ou **extremos** do conjunto de dados. A média é fortemente afetada por outliers, mas a mediana depende apenas de outliers ligeiramente ou nada. Considere a figura a seguir:
+
+![img3](https://files.realpython.com/media/py-stats-05.b5c3dba0cd5f.png)
+
+O conjunto de dados superior novamente tem os itens 1, 2.5, 4, 8 e 28. Sua média é 8.7 e a mediana é 5, como você viu anteriormente. O conjunto de dados inferior mostra o que está acontecendo quando você move o ponto mais à direita com o valor 28:
+
+> ° **Se você aumentar seu valor (movê-lo para a direita)**, a média aumentará, mas o valor mediano nunca mudará.
+> 
+> ° **Se você diminuir seu valor (movê-lo para a esquerda)**, a média cairá, mas a mediana permanecerá a mesma até que o valor do ponto móvel seja maior ou igual a 4.
+
+Você pode comparar a média e a mediana como uma maneira de detectar discrepâncias e assimetria em seus dados. Se o valor médio ou o valor mediano é mais útil para você depende do contexto do seu problema específico.
+
+Aqui está uma das muitas implementações Python puras possíveis da mediana:
+
+```python 
+n = len(x)
+if n % 2:
+    median = sorted(x)[round(0.5 * (n - 1))]
+else:
+    x_ord, index = sorted(x), round(0.5 * n)
+    median = 0.5 * (x_ord[index - 1] + x_ord[index])
+
+print(median)
+# output: 4
+```
+
+Duas etapas mais importantes dessa implementação são as seguintes:
+
+1. **Classificando** os elementos do conjunto de dados
+2. **Encontrando** o(s) elemento(s) intermediário(s) no conjunto de dados classificado
+
+Você pode obter a mediana com [statistics.median()](https://docs.python.org/3/library/statistics.html#statistics.median):
+
+```python
+median = statistics.median(x)
+print(median)
+# output: 4
+
+median = statistics.median(x[:-1])
+print(median)
+# output: 3.25
+```
+
+A versão ordenada de `x` é `[1, 2.5, 4, 8.0, 28.0]`, então o elemento no meio é 4. A versão ordenada de x[:-1], que é x sem o último item 28.0, é `[1 , 2.5, 4, 8.0]`. Agora, existem dois elementos do meio, 2.5 e 4. Sua média é 3.25.
+
+[median_low()](https://docs.python.org/3/library/statistics.html#statistics.median_low) e [median_high()](https://docs.python.org/3/library/statistics.html#statistics.median_high) são mais duas funções relacionadas à mediana na biblioteca de estatísticas do Python. Eles sempre retornam um elemento do conjunto de dados:
+
+> ° **Se o número de elementos for ímpar**, então há um único valor médio, então essas funções se comportam como `median()`.
+> 
+> ° **Se o número de elementos for par**, então existem dois valores médios. Nesse caso, `median_low()` retorna o valor médio mais baixo e `median_high()` o valor médio mais alto.
+
+Você pode usar essas funções da mesma forma que usaria median():
+
+```python
+statistics.median_low(x[:-1])
+# output: 2.5
+
+statistics.median_low(x[:-1])
+# output: 4
+```
+
+Os objetos da `série Pandas` têm o método [.median()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.median.html) que ignora os valores nan por padrão:
+
+```python
+print(z.median())
+# output: 4.0
+
+print(z_with_nan.median())
+# output: 4.0
+```
+
+O comportamento de `.median()` é consistente com `.mean()` em Pandas. Você pode alterar esse comportamento com o parâmetro opcional `skipna`.
