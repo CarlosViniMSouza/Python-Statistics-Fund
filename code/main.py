@@ -106,3 +106,25 @@ scipy.stats.hmean(y)
 
 scipy.stats.hmean(z)
 # output: 2.7613412228796843
+
+g_mean = 1
+for item in x:
+    g_mean *= item
+
+g_mean **= 1 / len(x)
+print(g_mean)
+# Output: 4.677885674856041
+
+g_mean = statistics.geometric_mean(x)
+print(g_mean)
+# Output: 4.67788567485604
+
+g_mean = statistics.geometric_mean(x_with_nan)
+print(g_mean)
+# Output: nan
+
+print(scipy.stats.gmean(y))
+# output: 4.67788567485604
+
+print(scipy.stats.gmean(z))
+# output: 4.67788567485604

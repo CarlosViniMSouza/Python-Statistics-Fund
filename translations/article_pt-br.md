@@ -22,7 +22,7 @@ Você aprenderá a entender e calcular essas medidas com Python.
 
 ### População e Amostras:
 
-Nas estatísticas, a **população** é um conjunto de todos os elementos ou itens nos quais você está interessado. As populações geralmente são vastas, o que as torna inadequadas para coletar e analisar dados. É por isso que os estatísticos geralmente tentam tirar algumas conclusões sobre uma população escolhendo e examinando um subconjunto representativo dessa população.
+Nas estatísticas, a **população** é um conjunto de todos os elementos ou itens nos quais você está interessado. As populações geralmente são vastas, o que as torna inadequadas para coletar e analisar dados. É por isso que os estatísticos geralmente tentam tirar algumas conclusões sobre uma população escolhendo e exami`nan`do um subconjunto representativo dessa população.
 
 Esse subconjunto de uma população é chamado de **amostra**. Idealmente, a amostra deve preservar as características estatísticas essenciais da população de forma satisfatória. Dessa maneira, você poderá usar a amostra para obter conclusões sobre a população.
 
@@ -112,47 +112,47 @@ Vamos criar alguns dados para trabalhar. Você começará com listas Python que 
 
 ```python
 x_list = [8.0, 1, 2.5, 4, 28.0]
-x_with_nan = [8.0, 1, 2.5, math.nan, 4, 28.0]
+x_with_`nan` = [8.0, 1, 2.5, math.`nan`, 4, 28.0]
 
 print(x_list)
 # Output: [8.0, 1, 2.5, 4, 28.0]
 
-print(x_with_nan)
-# Output: [8.0, 1, 2.5, nan, 4, 28.0]
+print(x_with_`nan`)
+# Output: [8.0, 1, 2.5, `nan`, 4, 28.0]
 ```
 
-Agora você tem as listas `x_list` e `x_with_nan`. Eles são quase os mesmos, com a diferença de que x_with_nan contém um valor nan. É importante entender o comportamento das rotinas de estatísticas do Python quando elas se deparam com um [valor não numérico (nan)](https://en.wikipedia.org/wiki/NaN). Na ciência de dados, os valores ausentes são comuns e você geralmente os substitui por `nan`.
+Agora você tem as listas `x_list` e `x_with_`nan``. Eles são quase os mesmos, com a diferença de que x_with_`nan` contém um valor `nan`. É importante entender o comportamento das rotinas de estatísticas do Python quando elas se deparam com um [valor não numérico (`nan`)](https://en.wikipedia.org/wiki/`NaN`). Na ciência de dados, os valores ausentes são comuns e você geralmente os substitui por ``nan``.
 
-> **Nota**: Como você obtém um valor nan?
+> **Nota**: Como você obtém um valor `nan`?
 > 
 > Em Python, você pode usar qualquer um dos seguintes:
 > 
->   ° float('nan')
->   ° math.nan
->   ° np.nan
+>   ° float('`nan`')
+>   ° math.`nan`
+>   ° np.`nan`
 > 
 > Você pode usar todas essas funções de forma intercambiável:
 > 
 > ```python
-> math.isnan(np.nan), np.isnan(math.nan)
+> math.is`nan`(np.`nan`), np.is`nan`(math.`nan`)
 > # output: (True, True)
 > 
-> math.isnan(y_with_nan[3]), np.isnan(y_with_nan[3])
+> math.is`nan`(y_with_`nan`[3]), np.is`nan`(y_with_`nan`[3])
 > # output: (True, True)
 > ```
 > 
-> Você pode ver que as funções são todas equivalentes. No entanto, lembre-se de que comparar dois valores `nan` para igualdade retorna `False`. Em outras palavras, `math.nan == math.nan` é `False`!
+> Você pode ver que as funções são todas equivalentes. No entanto, lembre-se de que comparar dois valores ``nan`` para igualdade retorna `False`. Em outras palavras, `math.`nan` == math.`nan`` é `False`!
 
-Agora, crie objetos np.ndarray e pd.Series que correspondam a x e x_with_nan:
+Agora, crie objetos np.ndarray e pd.Series que correspondam a x e x_with_`nan`:
 
 ```python
-y, y_with_nan = np.array(x), np.array(x_with_nan)
-z, z_with_nan = pd.Series(x), pd.Series(x_with_nan)
+y, y_with_`nan` = np.array(x), np.array(x_with_`nan`)
+z, z_with_`nan` = pd.Series(x), pd.Series(x_with_`nan`)
 y
 # Output: array([ 8. ,  1. ,  2.5, 4. , 28. ])
 
-print(y_with_nan)
-# Output: array([ 8. ,  1. ,  2.5,  nan,  4. , 28. ])
+print(y_with_`nan`)
+# Output: array([ 8. ,  1. ,  2.5,  `nan`,  4. , 28. ])
 
 print(z)
 """
@@ -166,25 +166,25 @@ Output:
 dtype: float64
 """
 
-print(z_with_nan)
+print(z_with_`nan`)
 """
 Output: 
 
 0     8.0
 1     1.0
 2     2.5
-3     NaN
+3     `NaN`
 4     4.0
 5    28.0
 dtype: float64
 """
 ```
 
-Agora você tem dois arrays NumPy (y e y_with_nan) e dois Pandas Series (`z e z_with_nan`). Todos estes são sequências 1D de valores.
+Agora você tem dois arrays NumPy (y e y_with_`nan`) e dois Pandas Series (`z e z_with_`nan``). Todos estes são sequências 1D de valores.
 
 > **NOTA**: embora você use [listas](https://realpython.com/python-lists-tuples/) ao longo deste tutorial, lembre-se de que, na maioria dos casos, você pode usar [tuplas](https://realpython.com/python-lists-tuples/) da mesma maneira.
 
-Você pode opcionalmente especificar um rótulo para cada valor em `z e z_with_nan`.
+Você pode opcionalmente especificar um rótulo para cada valor em `z e z_with_`nan``.
 
 ### Medidas de tendência central:
 
@@ -231,19 +231,19 @@ print(mean)
 
 Você chamou as funções [mean()](https://docs.python.org/3/library/statistics.html#statistics.mean) e [fmean()](https://docs.python.org/3/library/statistics.html#statistics.fmean) da biblioteca de `estatísticas` interna do Python e obteve o mesmo resultado que obteve com o Python puro. `fmean()` é introduzido no [Python 3.8](https://realpython.com/python38-new-features/) como uma alternativa mais rápida para `mean()`. Ele sempre retorna um número de ponto flutuante.
 
-No entanto, se houver valores nan entre seus dados, `statistics.mean()` e `statistics.fmean()` retornará nan como saída:
+No entanto, se houver valores `nan` entre seus dados, `statistics.mean()` e `statistics.fmean()` retornará `nan` como saída:
 
 ```python
-mean = statistics.mean(x_with_nan)
+mean = statistics.mean(x_with_`nan`)
 print(mean)
-# output: nan
+# output: `nan`
 
-mean = statistics.fmean(x_with_nan)
+mean = statistics.fmean(x_with_`nan`)
 print(mean)
-# output: nan
+# output: `nan`
 ```
 
-Este resultado é consistente com o comportamento de sum(), porque sum(x_with_nan) também retorna `nan`.
+Este resultado é consistente com o comportamento de sum(), porque sum(x_with_`nan`) também retorna ``nan``.
 
 Se você usar o NumPy, poderá obter a média com [np.mean()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html):
 
@@ -261,24 +261,24 @@ print(mean)
 # output: 8.7
 ```
 
-A função `mean()` e o método `.mean()` de NumPy retornam o mesmo resultado que `statistics.mean()`. Este também é o caso quando há valores nan entre seus dados:
+A função `mean()` e o método `.mean()` de NumPy retornam o mesmo resultado que `statistics.mean()`. Este também é o caso quando há valores `nan` entre seus dados:
 
 ```python
-print(np.mean(y_with_nan))
-# output: nan
+print(np.mean(y_with_`nan`))
+# output: `nan`
 
-print(y_with_nan.mean())
-# output: nan
+print(y_with_`nan`.mean())
+# output: `nan`
 ```
 
-Muitas vezes, você não precisa obter um valor `nan` como resultado. Se você preferir ignorar os valores `nan`, então você pode usar [`np.nanmean()`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmean.html):
+Muitas vezes, você não precisa obter um valor ``nan`` como resultado. Se você preferir ignorar os valores ``nan``, então você pode usar [`np.`nan`mean()`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.`nan`mean.html):
 
 ```python
-print(np.nanmean(y_with_nan))
+print(np.`nan`mean(y_with_`nan`))
 # output: 8.7
 ```
 
-`nanmean()` simplesmente ignora todos os valores `nan`. Ele retorna o mesmo valor que `mean()` se você o aplicasse ao conjunto de dados sem os valores `nan`.
+``nan`mean()` simplesmente ignora todos os valores ``nan``. Ele retorna o mesmo valor que `mean()` se você o aplicasse ao conjunto de dados sem os valores ``nan``.
 
 ## Média Ponderada
 
@@ -297,7 +297,7 @@ print(0.2 * 2 + 0.5 * 4 + 0.3 * 8)
 
 Aqui, você leva em consideração as frequências com os pesos. Com esse método, você não precisa saber o número total de itens.
 
-Você pode implementar a média ponderada em Python puro combinando `sum()` com [range()](https://realpython.com/courses/python-range-function/) ou [zip()](https://realpython.com/python-zip-function/):
+Você pode implementar a média ponderada em Python puro combi`nan`do `sum()` com [range()](https://realpython.com/courses/python-range-function/) ou [zip()](https://realpython.com/python-zip-function/):
 
 ```python
 x = [8.0, 1, 2.5, 4, 28.0]
@@ -335,20 +335,20 @@ print((w * y).sum() / w.sum())
 
 É isso! Você calculou a média ponderada.
 
-No entanto, tenha cuidado se seu conjunto de dados contiver valores `nan`:
+No entanto, tenha cuidado se seu conjunto de dados contiver valores ``nan``:
 
 ```python
 w = np.array([0.1, 0.2, 0.3, 0.0, 0.2, 0.1])
-print((w * y_with_nan).sum() / w.sum())
-# output: nan
+print((w * y_with_`nan`).sum() / w.sum())
+# output: `nan`
 
-print(np.average(y_with_nan, weights=w))
-# output: nan
+print(np.average(y_with_`nan`, weights=w))
+# output: `nan`
 
-print(np.average(z_with_nan, weights=w))
-# output: nan
+print(np.average(z_with_`nan`, weights=w))
+# output: `nan`
 ```
-Nesse caso, `average()` retorna `nan`, que é consistente com `np.mean()`.
+Nesse caso, `average()` retorna ``nan``, que é consistente com `np.mean()`.
 
 ## Média Harmônica:
 
@@ -360,11 +360,11 @@ print(h_mean)
 # output: 2.7613412228796843
 ```
 
-O exemplo acima mostra uma implementação de `statistics.harmonic_mean()`. Se você tiver um valor `nan` em um conjunto de dados, ele retornará `nan`. Se houver pelo menos um 0, ele retornará 0. Se você fornecer pelo menos um número negativo, receberá [statistics.StatisticsError](https://docs.python.org/3/library/statistics.html#statistics.StatisticsError):
+O exemplo acima mostra uma implementação de `statistics.harmonic_mean()`. Se você tiver um valor ``nan`` em um conjunto de dados, ele retornará ``nan``. Se houver pelo menos um 0, ele retornará 0. Se você fornecer pelo menos um número negativo, receberá [statistics.StatisticsError](https://docs.python.org/3/library/statistics.html#statistics.StatisticsError):
 
 ```python
-statistics.harmonic_mean(x_with_nan)
-# output: nan
+statistics.harmonic_mean(x_with_`nan`)
+# output: `nan`
 
 statistics.harmonic_mean([1, 0, 2])
 # output: 0
@@ -385,4 +385,61 @@ scipy.stats.hmean(z)
 # output: 2.7613412228796843
 ```
 
-Novamente, esta é uma implementação bastante simples. No entanto, se seu conjunto de dados contiver nan, 0, um número negativo ou qualquer coisa menos números [positivos](https://realpython.com/python-numbers/), você receberá um [ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)!
+Novamente, esta é uma implementação bastante simples. No entanto, se seu conjunto de dados contiver `nan`, 0, um número negativo ou qualquer coisa menos números [positivos](https://realpython.com/python-numbers/), você receberá um [ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)!
+
+## Média Geomátrica:
+
+A **média geométrica** é a 𝑛-ésima raiz do produto de todos os 𝑛 elementos 𝑥ᵢ em um conjunto de dados 𝑥: ⁿ√(Πᵢ𝑥ᵢ), onde 𝑖 = 1, 2, …, 𝑛. A figura a seguir ilustra as médias aritméticas, harmônicas e geométricas de um conjunto de dados:
+
+![img2](https://files.realpython.com/media/py-stats-02.ec1ca0f9a9ac.png)
+
+Novamente, os pontos verdes representam os pontos de dados 1, 2,5, 4, 8 e 28. A linha tracejada vermelha é a média. A linha tracejada azul é a média harmônica e a linha tracejada amarela é a média geométrica.
+
+Você pode implementar a média geométrica em Python puro assim:
+
+```python
+g_mean = 1
+for item in x:
+  g_mean *= item
+
+g_mean **= 1 / len(x)
+print(g_mean)
+# output: 4.677885674856041
+```
+
+Como você pode ver, o valor da média geométrica, neste caso, difere significativamente dos valores das médias aritmética (8,7) e harmônica (2,76) para o mesmo conjunto de dados x.
+
+O Python 3.8 introduziu [statistics.geometric_mean()](https://docs.python.org/3/library/statistics.html#statistics.geometric_mean), que converte todos os valores em números de ponto flutuante e retorna sua média geométrica:
+
+```python
+g_mean = statistics.geometric_mean(x)
+print(g_mean)
+# output: 4.67788567485604
+```
+
+Você obteve o mesmo resultado do exemplo anterior, mas com um erro mínimo de arredondamento.
+
+Se você passar dados com valores `nan`, então `statistics.geometric_mean()` se comportará como a maioria das funções semelhantes e retornará ``nan``:
+
+```python
+g_mean = statistics.geometric_mean(x_with_`nan`)
+print(g_mean)
+# output: `nan`
+```
+
+De fato, isso é consistente com o comportamento de `statistics.mean()`, `statistics.fmean()` e `statistics.harmonic_mean()`. Se houver um número zero ou negativo entre seus dados, `statistics.geometric_mean()` aumentará o `statistics.StatisticsError`.
+
+Você também pode obter a média geométrica com `scipy.stats.gmean()`:
+
+```python
+print(scipy.stats.gmean(y))
+# output: 4.67788567485604
+print(scipy.stats.gmean(z))
+# output: 4.67788567485604
+```
+
+Você obteve o mesmo resultado com a implementação pura do Python.
+
+Se você tiver valores `nan` em um conjunto de dados, `gmean()` retornará `nan`. Se houver pelo menos um 0, ele retornará 0.0 e dará um aviso. Se você fornecer pelo menos um número negativo, receberá `nan` e o aviso.
+
+## Mediana
