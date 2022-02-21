@@ -204,3 +204,25 @@ print(w.mode())
 # output:
 # 0    2.0
 # dtype: float64
+
+n = len(x)
+mean = sum(x) / n
+var = sum((item - mean) ** 2 for item in x) / (n - 1)
+print(var)
+# output: 123.19999999999999
+
+var = statistics.variance(x)
+print(var)
+# output: 123.2
+
+print(statistics.variance(x_with_nan))
+# output: nan
+
+print(np.var(y_with_nan, ddof=1))
+# output: nan
+
+print(y_with_nan.var(ddof=1))
+# output: nan
+
+print(np.nanvar(y_with_nan, ddof=1))
+# output: 123.19999999999999

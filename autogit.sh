@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Sub-Sub-Topic: Mode -> added | Next Sub-Topic: Measures of Variability"
+git commit -m "Topic: Measures of Variability | Sub-Sub-Topic: Variance -> added | Next Sub-Sub-Topic: Standard Deviation"
 git push
 git status
