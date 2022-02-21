@@ -226,3 +226,32 @@ print(y_with_nan.var(ddof=1))
 
 print(np.nanvar(y_with_nan, ddof=1))
 # output: 123.19999999999999
+
+std = var ** 0.5
+print(std)
+# output: 11.099549540409285
+
+std = statistics.stdev(x)
+print(std)
+# output: 11.099549540409287
+
+print(np.std(y, ddof=1))
+# output: 11.099549540409285
+
+print(y.std(ddof=1))
+# output: 11.099549540409285
+
+print(np.std(y_with_nan, ddof=1))
+# output: nan
+
+print(y_with_nan.std(ddof=1))
+# output: nan
+
+print(np.nanstd(y_with_nan, ddof=1))
+# output: 11.099549540409285
+
+print(z.std(ddof=1))
+# output: 11.099549540409285
+
+print(z_with_nan.std(ddof=1))
+# output: 11.099549540409285

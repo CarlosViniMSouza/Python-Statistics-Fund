@@ -688,3 +688,63 @@ Você calcula a **variação da população** de forma semelhante à variação 
 ° `Especifique` o parâmetro ddof=0 se você usar NumPy ou Pandas. No NumPy, você pode omitir ddof porque seu valor padrão é 0.
 
 Observe que você deve sempre estar ciente se está trabalhando com uma amostra ou com toda a população sempre que estiver calculando a variância!
+
+### Desvio padrão
+
+O **desvio padrão da amostra** é outra medida de dispersão de dados. Está ligado à variância da amostra, pois o desvio padrão, 𝑠, é a raiz quadrada positiva da variância da amostra. O desvio padrão geralmente é mais conveniente do que a variância porque tem a mesma unidade dos pontos de dados. Depois de obter a variação, você pode calcular o desvio padrão com Python puro:
+
+```python
+std = var ** 0.5
+print(std)
+# output: 11.099549540409285
+```
+
+Embora esta solução funcione, você também pode usar [statistics.stdev()](https://docs.python.org/3/library/statistics.html#statistics.stdev):
+
+```python
+std = statistics.stdev(x)
+print(std)
+# output: 11.099549540409287
+```
+
+Claro, o resultado é o mesmo de antes. Assim como `variance()`, `stdev()` não calcula a média se você a fornecer explicitamente como o segundo argumento: `statistics.stdev(x, mean_)`.
+
+Você pode obter o desvio padrão com o NumPy quase da mesma maneira. Você pode usar a função std() e o método correspondente .std() para calcular o desvio padrão. Se houver valores nan no conjunto de dados, eles retornarão nan. Para ignorar valores nan, você deve usar np.nanstd(). Você usa std(), .std(), e nanstd() do NumPy como você usaria var(), .var() e nanvar():
+
+```python
+print(np.std(y, ddof=1))
+# output: 11.099549540409285
+
+print(y.std(ddof=1))
+# output: 11.099549540409285
+
+print(np.std(y_with_nan, ddof=1))
+# output: nan
+
+print(y_with_nan.std(ddof=1))
+# output: nan
+
+print(np.nanstd(y_with_nan, ddof=1))
+# output: 11.099549540409285
+```
+
+Não se esqueça de definir os graus de liberdade delta para 1!
+
+Os objetos `pd.Series` também possuem o método .std() que pula nan por padrão:
+
+```python
+print(z.std(ddof=1))
+# output: 11.099549540409285
+
+print(z_with_nan.std(ddof=1))
+# output: 11.099549540409285
+```
+
+O parâmetro `ddof` é padronizado como 1, então você pode omiti-lo. Novamente, se você quiser tratar os valores `nan` de maneira diferente, aplique o parâmetro `skipna`.
+
+O `desvio padrão da população` refere-se a toda a população. É a raiz quadrada positiva da variância da população. Você pode calculá-lo assim como o desvio padrão da amostra,
+com as seguintes diferenças:
+
+° **Encontre** a raiz quadrada da variância da população na implementação do Python puro.
+° **Use** [statistics.pstdev()](https://docs.python.org/3/library/statistics.html#statistics.pstdev) em vez de `statistics.stdev()`.
+° **Especifique** o parâmetro `ddof=0` se você usar NumPy ou Pandas. No NumPy, você pode omitir `ddof` porque seu valor padrão é 0.
