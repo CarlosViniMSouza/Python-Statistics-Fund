@@ -531,3 +531,79 @@ print(z_with_nan.median())
 ```
 
 O comportamento de `.median()` é consistente com `.mean()` em Pandas. Você pode alterar esse comportamento com o parâmetro opcional `skipna`.
+
+## Moda
+
+O **modo de amostra** é o valor no conjunto de dados que ocorre com mais frequência. Se não houver um único valor desse tipo, o conjunto será **multimodal**, pois possui vários valores modais. Por exemplo, no conjunto que contém os pontos 2, 3, 2, 8 e 12, o número 2 é a moda porque ocorre duas vezes, ao contrário dos demais itens que ocorrem apenas uma vez.
+
+É assim que você pode obter o modo com Python puro:
+
+```python
+sample = [2, 3, 2, 8, 12]
+
+sample2 = [12, 15, 12, 15, 21, 15, 12]
+
+mode = max((sample.count(item), item) for item in set(sample))[1]
+print(mode)
+# output: 2
+```
+
+Você usa `sample.count()` para obter o número de ocorrências de cada item em sample. O item com o número máximo de ocorrências é a moda. Observe que você não precisa usar `set(sample)`. Em vez disso, você pode substituí-lo por apenas u e iterar em toda a lista.
+
+> **Nota:** `set(sample)` retorna um [conjunto](https://realpython.com/python-sets/) Python com todos os itens exclusivos em sample. Você pode usar esse truque para otimizar o trabalho com dados maiores, especialmente quando espera ver muitas duplicatas.
+
+Você pode obter o modo com [statistics.mode()](https://docs.python.org/3/library/statistics.html#statistics.mode) e [statistics.multimode()](https://docs.python.org/3/library/statistics.html#statistics.multimode):
+
+```python
+mode = statistics.mode(sample)
+print(mode)
+# output:
+
+mode = statistics.multimode(sample)
+print(mode)
+# output: [2]
+```
+
+Você deve prestar atenção especial a esse cenário e ter cuidado ao escolher entre essas duas funções.
+
+`statistics.mode()` e `statistics.multimode()` tratam valores `nan` como valores regulares e podem retornar `nan` como o valor modal:
+
+```python
+statistics.mode([2, math.nan, 2])
+# output: 2
+
+statistics.multimode([2, math.nan, 2])
+# output: [2]
+
+statistics.mode([2, math.nan, 0, math.nan, 5])
+# output: nan
+
+statistics.multimode([2, math.nan, 0, math.nan, 5])
+# output: [nan]
+```
+
+> **Nota**: `statistics.multimode()` é introduzido no [Python 3.8](https://realpython.com/courses/cool-new-features-python-38/).
+
+Os objetos Pandas Series têm o método .mode() que trata bem os valores multimodais e ignora os valores nan por padrão:
+
+```python
+u, v, w = pd.Series(sample), pd.Series(sample2), pd.Series([2, 2, math.nan])
+
+print(u.mode())
+# output:
+# 0    2
+# dtype: int64
+
+print(v.mode())
+# output:
+# 0    12
+# 1    15
+# dtype: int64
+
+print(w.mode())
+# output:
+# 0    2.0
+# dtype: float64
+```
+
+Como você pode ver, `.mode()` retorna um novo `pd.Series` que contém todos os valores modais. Se você quiser que `.mode()` leve em consideração os valores nan, então apenas passe o argumento opcional `dropna=False`.

@@ -158,3 +158,49 @@ print(z.median())
 
 print(z_with_nan.median())
 # output: 4.0
+
+sample = [2, 3, 2, 8, 12]
+
+sample2 = [12, 15, 12, 15, 21, 15, 12]
+
+mode = max((sample.count(item), item) for item in set(sample))[1]
+print(mode)
+# output: 2
+
+mode = statistics.mode(sample)
+print(mode)
+# output:
+
+mode = statistics.multimode(sample)
+print(mode)
+# output: [2]
+
+statistics.mode([2, math.nan, 2])
+# output: 2
+
+statistics.multimode([2, math.nan, 2])
+# output: [2]
+
+statistics.mode([2, math.nan, 0, math.nan, 5])
+# output: nan
+
+statistics.multimode([2, math.nan, 0, math.nan, 5])
+# output: [nan]
+
+u, v, w = pd.Series(sample), pd.Series(sample2), pd.Series([2, 2, math.nan])
+
+print(u.mode())
+# output:
+# 0    2
+# dtype: int64
+
+print(v.mode())
+# output:
+# 0    12
+# 1    15
+# dtype: int64
+
+print(w.mode())
+# output:
+# 0    2.0
+# dtype: float64

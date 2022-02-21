@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Sub-Sub-Topic: Median -> added | Next Sub-Topic: Mode"
+git commit -m "Sub-Sub-Topic: Mode -> added | Next Sub-Topic: Measures of Variability"
 git push
 git status
