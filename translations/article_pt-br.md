@@ -748,3 +748,34 @@ com as seguintes diferenças:
 ° **Encontre** a raiz quadrada da variância da população na implementação do Python puro.
 ° **Use** [statistics.pstdev()](https://docs.python.org/3/library/statistics.html#statistics.pstdev) em vez de `statistics.stdev()`.
 ° **Especifique** o parâmetro `ddof=0` se você usar NumPy ou Pandas. No NumPy, você pode omitir `ddof` porque seu valor padrão é 0.
+
+### Distorção
+
+A assimetria da amostra mede a assimetria de uma amostra de dados.
+
+Existem várias definições matemáticas de assimetria. Uma expressão comum para calcular a assimetria do conjunto de dados 𝑥 com elementos 𝑛 é (𝑛² / ((𝑛 − 1)(𝑛 − 2))) (Σᵢ(𝑥ᵢ − mean(𝑥))³ / (𝑛𝑠³)). Uma expressão mais simples é Σᵢ(𝑥ᵢ − média(𝑥))³ 𝑛 / ((𝑛 − 1)(𝑛 − 2)𝑠³), onde 𝑖 = 1, 2, …, 𝑛 e média(𝑥) é a média amostral de 𝑥. A assimetria definida assim é chamada de **coeficiente de momento padronizado de Fisher-Pearson ajustado**.
+
+A figura anterior mostrou dois conjuntos de dados bastante simétricos. Em outras palavras, seus pontos tinham distâncias semelhantes da média. Em contraste, a imagem a seguir ilustra dois conjuntos assimétricos:
+
+![img1](https://files.realpython.com/media/py-stats-07.92abf9f362b0.png)
+
+O primeiro conjunto é representado pelos pontos verdes e o segundo pelos brancos. Normalmente, **valores de assimetria negativos** indicam que há uma cauda dominante no lado esquerdo, que você pode ver com o primeiro conjunto. Os **valores de assimetria positivos** correspondem a uma cauda mais longa ou mais gorda no lado direito, que você pode ver no segundo conjunto. Se a assimetria estiver próxima de 0 (por exemplo, entre -0,5 e 0,5), o conjunto de dados será considerado bastante simétrico.
+
+Depois de calcular o tamanho do seu conjunto de dados n, a média da amostra `mean_` e o desvio padrão std_, você pode obter a assimetria da amostra com Python puro:
+
+```python
+x = [8.0, 1, 2.5, 4, 28.0]
+n = len(x)
+
+mean = sum(x) / n
+var = sum((item - mean)**2 for item in x) / (n - 1)
+std = var ** 0.5
+skew = (sum((item - mean)**3 for item in x) * n / ((n - 1) * (n - 2) * std ** 3))
+
+print(skew)
+# output: 1.9470432273905929
+```
+
+A assimetria é positiva, então x tem uma cauda do lado direito.
+
+Você também pode calcular a assimetria da amostra com [scipy.stats.skew()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)

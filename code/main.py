@@ -215,7 +215,7 @@ var = statistics.variance(x)
 print(var)
 # output: 123.2
 
-print(statistics.variance(x_with_nan))
+## print(statistics.variance(x_with_nan))
 # output: nan
 
 print(np.var(y_with_nan, ddof=1))
@@ -255,3 +255,14 @@ print(z.std(ddof=1))
 
 print(z_with_nan.std(ddof=1))
 # output: 11.099549540409285
+
+x = [8.0, 1, 2.5, 4, 28.0]
+n = len(x)
+
+mean = sum(x) / n
+var = sum((item - mean)**2 for item in x) / (n - 1)
+std = var ** 0.5
+skew = (sum((item - mean)**3 for item in x) * n / ((n - 1) * (n - 2) * std ** 3))
+
+print(skew)
+# output: 1.9470432273905929
