@@ -936,9 +936,13 @@ Esta função retorna nan se houver valores nan em sua matriz NumPy. Se você us
 Como alternativa, você pode usar funções e métodos internos do Python, NumPy ou Pandas para calcular os máximos e mínimos de sequências:
 
 > ° [.max()](https://docs.python.org/3/library/functions.html#max) e [.min()](https://docs.python.org/3/library/functions.html#min) da biblioteca padrão do Python
+> 
 > ° [.amax()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.amax.html) e [.amin()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.amin.html) do NumPy
+> 
 > ° [.nanmax()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmax.html) e [.nanmin()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmin.html) do NumPy para ignorar os valores nan
+> 
 > ° [.max()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.max.html) e [.min()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.min.html) do NumPy
+> 
 > ° [.max()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.max.html) e [.min()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.min.html) do Pandas para ignorar os valores nan por padrão
 
 Aqui estão alguns exemplos de como você usaria essas rotinas:
@@ -961,3 +965,85 @@ print(z_with_nan.max() - z_with_nan.min())
 ```
 
 É assim que você obtém o intervalo de dados.
+
+## Resumo das Estatísticas Descritivas
+
+SciPy e Pandas oferecem rotinas úteis para obter estatísticas descritivas rapidamente com uma única função ou chamada de método. Você pode usar [scipy.stats.describe()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.describe.html) assim:
+
+Você precisa fornecer o conjunto de dados como o primeiro argumento. O argumento pode ser uma matriz NumPy, lista, tupla ou estrutura de dados semelhante. Você pode omitir `ddof=1`, pois é o padrão e só importa quando você está calculando a variação. Você pode passar `bias=False` para forçar a correção da assimetria e [curtose](https://en.wikipedia.org/wiki/Kurtosis) para viés estatístico.
+
+> **Nota**: O parâmetro opcional `nan_policy` pode assumir os valores `'propagate'` (padrão), `'raise'` (um erro) ou `'omit'`. Este parâmetro permite controlar o que está acontecendo quando há valores `nan`.
+
+`describe()` retorna um objeto que contém as seguintes estatísticas descritivas:
+
+> ° **nobs**: the number of observations or elements in your dataset
+> 
+> ° **minmax**: the tuple with the minimum and maximum values of your dataset
+> 
+> ° **mean**: the mean of your dataset
+> 
+> ° **variance**: the variance of your dataset
+> 
+> ° **skewness**: the skewness of your dataset
+> 
+> ° **kurtosis**: the kurtosis of your dataset
+
+Você pode acessar valores específicos com notação de ponto:
+
+```python
+print(result.nobs())
+# output: 9
+
+print(result.minmax[0])
+# output: -5.0
+
+print(result.minmax[1])
+# output: 41.0
+
+print(result.mean)
+# output: 11.622222222222222
+
+print(result.variance)
+# output: 228.75194444444446
+
+print(result.skewness)
+# output: 0.9249043136685094
+
+print(result.kurtosis)
+# output: 0.14770623629658886
+```
+
+Com o SciPy, você está a apenas uma chamada de função de um resumo de estatísticas descritivas para seu conjunto de dados.
+
+Pandas tem funcionalidade semelhante, se não melhor. `Objetos de série` têm o método [.describe()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.describe.html):
+
+```python
+result = z.describe()
+
+print(result)
+"""
+output:
+
+count     9.000000
+mean     11.622222
+std      15.124548
+min      -5.000000
+25%       0.100000
+50%       8.000000
+75%      21.000000
+max      41.000000
+dtype: float64
+"""
+```
+
+Ele retorna uma nova série que contém o seguinte:
+
+> ° **contagem**: o número de elementos em seu conjunto de dados
+> 
+> ° **mean**: a média do seu conjunto de dados
+> 
+> ° **std**: o desvio padrão do seu conjunto de dados
+> 
+> ° **min e max**: os valores mínimo e máximo do seu conjunto de dados
+> 
+> ° **25%, 50% e 75%**: os quartis do seu conjunto de dados

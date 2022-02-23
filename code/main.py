@@ -373,3 +373,46 @@ print(z.max() - z.min())
 
 print(z_with_nan.max() - z_with_nan.min())
 # output: 46.0
+
+result = scipy.stats.describe(y, ddof=1, bias=False)
+
+print(result)
+# output: DescribeResult(nobs=9, minmax=(-5.0, 41.0), mean=11.622222222222222, variance=228.75194444444446, skewness=0.9249043136685094, kurtosis=0.14770623629658886)
+
+print(result.nobs())
+# output: 9
+
+print(result.minmax[0])
+# output: -5.0
+
+print(result.minmax[1])
+# output: 41.0
+
+print(result.mean)
+# output: 11.622222222222222
+
+print(result.variance)
+# output: 228.75194444444446
+
+print(result.skewness)
+# output: 0.9249043136685094
+
+print(result.kurtosis)
+# output: 0.14770623629658886
+
+result = z.describe()
+
+print(result)
+"""
+output:
+
+count     9.000000
+mean     11.622222
+std      15.124548
+min      -5.000000
+25%       0.100000
+50%       8.000000
+75%      21.000000
+max      41.000000
+dtype: float64
+"""
