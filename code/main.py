@@ -266,3 +266,19 @@ skew = (sum((item - mean)**3 for item in x) * n / ((n - 1) * (n - 2) * std ** 3)
 
 print(skew)
 # output: 1.9470432273905929
+
+y, y_with_nan = np.array(x), np.array(x_with_nan)
+
+print(scipy.stats.skew(y, bias=False))
+# output: 1.9470432273905927
+
+print(scipy.stats.skew(y_with_nan, bias=False))
+# output: nan
+
+z, z_with_nan = pd.Series(x), pd.Series(x_with_nan)
+
+print(z.skew())
+# output: 1.9470432273905924
+
+print(z_with_nan.skew())
+# output: 1.9470432273905924

@@ -779,3 +779,29 @@ print(skew)
 A assimetria é positiva, então x tem uma cauda do lado direito.
 
 Você também pode calcular a assimetria da amostra com [scipy.stats.skew()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)
+
+```python
+y, y_with_nan = np.array(x), np.array(x_with_nan)
+
+print(scipy.stats.skew(y, bias=False))
+# output: 1.9470432273905927
+
+print(scipy.stats.skew(y_with_nan, bias=False))
+# output: nan
+```
+
+O resultado obtido é o mesmo da implementação Python pura. O `viés` do parâmetro é definido como `Falso` para habilitar as correções para viés estatístico. O parâmetro opcional `nan_policy` pode assumir os valores `'propagate', 'raise'` ou `'omit'`. Ele permite que você controle como lidará com os valores `nan`.
+
+Os objetos da `série` Pandas têm o método [.skew()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.skew.html) que também retorna a assimetria de um conjunto de dados:
+
+```python
+z, z_with_nan = pd.Series(x), pd.Series(x_with_nan)
+
+print(z.skew())
+# output: 1.9470432273905924
+
+print(z_with_nan.skew())
+# output: 1.9470432273905924
+```
+
+Como outros métodos, `.skew()` ignora os valores `nan` por padrão, devido ao valor padrão do parâmetro opcional `skipna`.
