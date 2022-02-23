@@ -282,3 +282,25 @@ print(z.skew())
 
 print(z_with_nan.skew())
 # output: 1.9470432273905924
+
+x = [-5.0, -1.1, 0.1, 2.0, 8.0, 12.8, 21.0, 25.8, 41.0]
+
+print(statistics.quantiles(x, n=2))
+# output: [8.0]
+
+print(statistics.quantiles(x, n=4, method="inclusive"))
+# output: [0.1, 8.0, 21.0]
+
+y = np.array(x)
+
+print(np.percentile(y, 5))
+# output: -3.44
+
+print(np.percentile(y, 95))
+# output: 34.919999999999995
+
+print(np.percentile(y, [25, 50, 75]))
+# output: array([0.1, 8. , 21. ])
+
+print(np.median(y))
+# output: 8.0

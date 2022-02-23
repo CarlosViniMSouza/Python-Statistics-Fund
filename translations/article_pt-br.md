@@ -805,3 +805,51 @@ print(z_with_nan.skew())
 ```
 
 Como outros métodos, `.skew()` ignora os valores `nan` por padrão, devido ao valor padrão do parâmetro opcional `skipna`.
+
+### Percentis
+
+O **percentil 𝑝 da amostra** é o elemento no conjunto de dados tal que 𝑝% dos elementos no conjunto de dados são menores ou iguais a esse valor. Além disso, (100 − 𝑝)% dos elementos são maiores ou iguais a esse valor. Se houver dois desses elementos no conjunto de dados, o percentil 𝑝 da amostra é sua média aritmética. Cada conjunto de dados tem três **quartis**, que são os percentis que dividem o conjunto de dados em quatro partes:
+
+> ° **O primeiro quartil** é o percentil 25 da amostra. Ele divide aproximadamente 25% dos menores itens do restante do conjunto de dados.
+> 
+> ° **O segundo quartil** é o percentil 50 da amostra ou a mediana. Aproximadamente 25% dos itens situam-se entre o primeiro e o segundo quartis e outros 25% entre o segundo e o terceiro quartis.
+> 
+> ° **O terceiro quartil** é o percentil 75 da amostra. Ele divide aproximadamente 25% dos maiores itens do restante do conjunto de dados.
+
+Cada parte tem aproximadamente o mesmo número de itens. Se você quiser dividir seus dados em vários intervalos, você pode usar [statistics.quantiles()](https://docs.python.org/3/library/statistics.html#statistics.quantiles):
+
+```python
+x = [-5.0, -1.1, 0.1, 2.0, 8.0, 12.8, 21.0, 25.8, 41.0]
+
+print(statistics.quantiles(x, n=2))
+# output: [8.0]
+
+print(statistics.quantiles(x, n=4, method="inclusive"))
+# output: [0.1, 8.0, 21.0]
+```
+
+Neste exemplo, 8.0 é a mediana de x, enquanto 0.1 e 21.0 são os percentis 25 e 75 da amostra, respectivamente. O parâmetro n define o número de percentis de igual probabilidade resultantes e o método determina como calculá-los.
+
+Você também pode usar [np.percentile()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html) para determinar qualquer percentil de amostra em seu conjunto de dados. Por exemplo, é assim que você pode encontrar os percentis 5 e 95:
+
+```python
+y = np.array(x)
+
+print(np.percentile(y, 5))
+# output: -3.44
+
+print(np.percentile(y, 95))
+# output: 34.919999999999995
+```
+
+`percentile()` recebe vários argumentos. Você precisa fornecer o conjunto de dados como o primeiro argumento e o valor do percentil como o segundo. O conjunto de dados pode estar na forma de uma matriz NumPy, lista, tupla ou estrutura de dados semelhante. O percentil pode ser um número entre 0 e 100 como no exemplo acima, mas também pode ser uma sequência de números:
+
+```python
+print(np.percentile(y, [25, 50, 75]))
+# output: array([0.1, 8. , 21. ])
+
+print(np.median(y))
+# output: 8.0
+```
+
+Este código calcula os percentis 25, 50 e 75 de uma só vez. Se o valor do percentil for uma sequência, percentile() retornará uma matriz NumPy com os resultados. A primeira instrução retorna a matriz de quartis. A segunda instrução retorna a mediana, para que você possa confirmar que é igual ao percentil 50, que é 8.0 .
