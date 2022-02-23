@@ -304,3 +304,45 @@ print(np.percentile(y, [25, 50, 75]))
 
 print(np.median(y))
 # output: 8.0
+
+y_with_nan = np.insert(y, 2, np.nan)
+
+print(y_with_nan)
+# output: array([-5. , -1.1,  nan,  0.1,  2. ,  8. , 12.8, 21. , 25.8, 41. ])
+
+print(np.nanpercentile(y_with_nan, [25, 20, 75]))
+# output: array([ 0.1,  8. , 21. ])
+
+print(np.quantile(y, 0.05))
+# output: -3.44
+
+print(np.percentile(y, 0.95))
+# output: 34.919999999999995
+
+print(np.quantile(y, [0.25, 0.5, 0.75]))
+# output: array([0.1, 8. , 21. ])
+
+print(np.nanquantile(y_with_nan, [0.25, 0.5, 0.75]))
+# output: array([ 0.1,  8. , 21. ])
+
+z, z_with_nan = pd.Series(y), pd.Series(y_with_nan)
+
+print(z.quantile(0.05))
+# output: -3.44
+
+print(z.quantile(0.95))
+# output: 34.919999999999995
+
+print(z.quantile([0.25, 0.5, 0.75]))
+# output:
+# 0.25     0.1
+# 0.50     8.0
+# 0.75    21.0
+# dtype: float64
+
+print(z_with_nan.quantile([0.25, 0.5, 0.75]))
+# output:
+# 0.25     0.1
+# 0.50     8.0
+# 0.75    21.0
+# dtype: float64

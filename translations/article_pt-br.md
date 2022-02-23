@@ -853,3 +853,62 @@ print(np.median(y))
 ```
 
 Este código calcula os percentis 25, 50 e 75 de uma só vez. Se o valor do percentil for uma sequência, percentile() retornará uma matriz NumPy com os resultados. A primeira instrução retorna a matriz de quartis. A segunda instrução retorna a mediana, para que você possa confirmar que é igual ao percentil 50, que é 8.0 .
+
+Se você quiser ignorar os valores nan, use [np.nanpercentile()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanpercentile.html) em vez disso:
+
+```python
+y_with_nan = np.insert(y, 2, np.nan)
+
+print(y_with_nan)
+# output: array([-5. , -1.1,  nan,  0.1,  2. ,  8. , 12.8, 21. , 25.8, 41. ])
+
+print(np.nanpercentile(y_with_nan, [25, 20, 75]))
+# output: array([ 0.1,  8. , 21. ])
+```
+
+É assim que você pode evitar valores nan.
+
+O NumPy também oferece funcionalidades muito semelhantes em [quantile()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.quantile.html) e [nanquantile()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanquantile.html). Se você os usar, precisará fornecer os valores de quantil como números entre 0 e 1 em vez de percentis:
+
+```python
+print(np.quantile(y, 0.05))
+# output: -3.44
+
+print(np.percentile(y, 0.95))
+# output: 34.919999999999995
+
+print(np.quantile(y, [0.25, 0.5, 0.75]))
+# output: array([0.1, 8. , 21. ])
+
+print(np.nanquantile(y_with_nan, [0.25, 0.5, 0.75]))
+```
+
+Os resultados são os mesmos dos exemplos anteriores, mas aqui seus argumentos estão entre 0 e 1. Em outras palavras, você passou 0,05 em vez de 5 e 0,95 em vez de 95.
+
+Os objetos `pd.Series` possuem o método [.quantile()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.quantile.html):
+
+```python
+z, z_with_nan = pd.Series(y), pd.Series(y_with_nan)
+
+print(z.quantile(0.05))
+# output: -3.44
+
+print(z.quantile(0.95))
+# output: 34.919999999999995
+
+print(z.quantile([0.25, 0.5, 0.75]))
+# output:
+# 0.25     0.1
+# 0.50     8.0
+# 0.75    21.0
+# dtype: float64
+
+print(z_with_nan.quantile([0.25, 0.5, 0.75]))
+# output:
+# 0.25     0.1
+# 0.50     8.0
+# 0.75    21.0
+# dtype: float64
+```
+
+`.quantile()` também precisa que você forneça o valor do quantil como argumento. Esse valor pode ser um número entre 0 e 1 ou uma sequência de números. No primeiro caso, `.quantile()` retorna um escalar. No segundo caso, retorna uma nova `Série` contendo os resultados.
