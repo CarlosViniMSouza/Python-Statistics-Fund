@@ -912,3 +912,52 @@ print(z_with_nan.quantile([0.25, 0.5, 0.75]))
 ```
 
 `.quantile()` também precisa que você forneça o valor do quantil como argumento. Esse valor pode ser um número entre 0 e 1 ou uma sequência de números. No primeiro caso, `.quantile()` retorna um escalar. No segundo caso, retorna uma nova `Série` contendo os resultados.
+
+### Gamas
+
+O **intervalo de dados** é a diferença entre o elemento máximo e mínimo no conjunto de dados. Você pode obtê-lo com a função [np.ptp()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ptp.html):
+
+```python
+print(np.ptp(y))
+# output: 46.0
+
+print(np.ptp(z))
+# output: 46.0
+
+print(np.ptp(y_with_nan))
+# output: nan
+
+print(np.ptp(z_with_nan))
+# output: 46.0
+```
+
+Esta função retorna nan se houver valores nan em sua matriz NumPy. Se você usar um objeto `Pandas Series`, ele retornará um número.
+
+Como alternativa, você pode usar funções e métodos internos do Python, NumPy ou Pandas para calcular os máximos e mínimos de sequências:
+
+> ° [.max()](https://docs.python.org/3/library/functions.html#max) e [.min()](https://docs.python.org/3/library/functions.html#min) da biblioteca padrão do Python
+> ° [.amax()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.amax.html) e [.amin()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.amin.html) do NumPy
+> ° [.nanmax()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmax.html) e [.nanmin()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmin.html) do NumPy para ignorar os valores nan
+> ° [.max()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.max.html) e [.min()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.min.html) do NumPy
+> ° [.max()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.max.html) e [.min()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.min.html) do Pandas para ignorar os valores nan por padrão
+
+Aqui estão alguns exemplos de como você usaria essas rotinas:
+
+```python
+print(np.amax(y) - np.amin(y))
+# output: 46.0
+
+print(np.nanmax(y_with_nan) - np.nanmin(y_with_nan))
+# output: 46.0
+
+print(y.max() - y.min())
+# output: 46.0
+
+print(z.max() - z.min())
+# output: 46.0
+
+print(z_with_nan.max() - z_with_nan.min())
+# output: 46.0
+```
+
+É assim que você obtém o intervalo de dados.

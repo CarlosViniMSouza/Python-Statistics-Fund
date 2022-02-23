@@ -346,3 +346,30 @@ print(z_with_nan.quantile([0.25, 0.5, 0.75]))
 # 0.50     8.0
 # 0.75    21.0
 # dtype: float64
+
+print(np.ptp(y))
+# output: 46.0
+
+print(np.ptp(z))
+# output: 46.0
+
+print(np.ptp(y_with_nan))
+# output: nan
+
+print(np.ptp(z_with_nan))
+# output: 46.0
+
+print(np.amax(y) - np.amin(y))
+# output: 46.0
+
+print(np.nanmax(y_with_nan) - np.nanmin(y_with_nan))
+# output: 46.0
+
+print(y.max() - y.min())
+# output: 46.0
+
+print(z.max() - z.min())
+# output: 46.0
+
+print(z_with_nan.max() - z_with_nan.min())
+# output: 46.0
