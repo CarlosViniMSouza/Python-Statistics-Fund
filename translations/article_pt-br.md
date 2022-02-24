@@ -1077,3 +1077,59 @@ x2, y2 = pd.Series(x1), pd.Series(y1)
 ```
 
 Agora que você tem as duas variáveis, pode começar a explorar a relação entre elas.
+
+### Covariância
+
+A **covariância da amostra** é uma medida que quantifica a força e a direção de uma relação entre um par de variáveis:
+
+> ° **Se a correlação for positiva**, então a covariância também será positiva. Uma relação mais forte corresponde a um valor mais alto da covariância.
+> ° **Se a correlação for negativa**, a covariância também será negativa. Uma relação mais forte corresponde a um valor mais baixo (ou mais alto absoluto) da covariância.
+> ° **Se a correlação for fraca**, então a covariância é próxima de zero.
+
+A covariância das variáveis 𝑥 e 𝑦 é matematicamente definida como 𝑠ˣʸ = Σᵢ (𝑥ᵢ − média(𝑥)) (𝑦ᵢ − média(𝑦)) / (𝑛 − 1), onde 𝑖 = 1, 2, …, 𝑛, média (𝑥) é a média amostral de 𝑥 e a média(𝑦) é a média amostral de 𝑦. Segue-se que a covariância de duas variáveis idênticas é na verdade a variância: 𝑠ˣˣ = Σᵢ(𝑥ᵢ − média(𝑥))² / (𝑛 − 1) = (𝑠ˣ)² e 𝑠ʸʸ = Σᵢ(𝑦ᵢ − média(𝑦))² / (𝑛 − 1) = (𝑠ʸ)².
+
+É assim que você pode calcular a covariância em Python puro:
+
+```python
+n = len(x)
+x_mean, y_mean = sum(x) / n, sum(y) / n
+cov_xy = (sum((x[k] - x_mean) * (y[k] - y_mean) for k in range(n)) / (n - 1))
+print(cov_xy)
+```
+
+Primeiro, você tem que encontrar a média de x e y. Em seguida, você aplica a fórmula matemática para a covariância.
+
+NumPy tem a função [cov()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.cov.html) que retorna a matriz de covariância:
+
+```python
+cov_matrix = np.cov(x1, y1)
+print(cov_matrix)
+# output: array([[38.5       , 19.95      ],
+#               [19.95      , 13.91428571]])
+```
+
+Observe que cov() tem os parâmetros opcionais bias, cujo padrão é False, e ddof, cujo padrão é None. Seus valores padrão são adequados para obter a matriz de covariância de amostra. O elemento superior esquerdo da matriz de covariância é a covariância de x e x, ou a variância de x. Da mesma forma, o elemento inferior direito é a covariância de y e y, ou a variância de y. Você pode verificar se isso é verdade:
+
+```python
+print(x1.var(ddof=1))
+# output: 38.5
+
+print(y1.var(ddof=1))
+# output: 13.914285714285711
+```
+
+Como você pode ver, as variâncias de x e y são iguais a cov_matrix[0, 0] e cov_matrix[1, 1], respectivamente.
+
+Pandas `Series` tem o método [.cov()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.cov.html) que você pode usar para calcular a covariância:
+
+```python
+cov_xy = x2.cov(y2)
+print(cov_xy)
+# output: 19.95
+
+cov_xy = y2.cov(x2)
+print(cov_xy)
+# output: 19.95
+```
+
+Aqui, você chama `.cov()` em um objeto `Series` e passa o outro objeto como o primeiro argumento.

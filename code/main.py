@@ -421,3 +421,27 @@ x = list(range(-10, 11))
 y = [0, 2, 2, 2, 2, 3, 3, 6, 7, 4, 7, 6, 6, 9, 4, 5, 5, 10, 11, 12, 14]
 x1, y1 = np.array(x), np.array(y)
 x2, y2 = pd.Series(x1), pd.Series(y1)
+
+n = len(x)
+x_mean, y_mean = sum(x) / n, sum(y) / n
+cov_xy = (sum((x[k] - x_mean) * (y[k] - y_mean) for k in range(n)) / (n - 1))
+print(cov_xy)
+
+cov_matrix = np.cov(x1, y1)
+print(cov_matrix)
+# output: array([[38.5       , 19.95      ],
+#               [19.95      , 13.91428571]])
+
+print(x1.var(ddof=1))
+# output: 38.5
+
+print(y1.var(ddof=1))
+# output: 13.914285714285711
+
+cov_xy = x2.cov(y2)
+print(cov_xy)
+# output: 19.95
+
+cov_xy = y2.cov(x2)
+print(cov_xy)
+# output: 19.95
