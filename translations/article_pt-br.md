@@ -1047,3 +1047,33 @@ Ele retorna uma nova série que contém o seguinte:
 > ° **min e max**: os valores mínimo e máximo do seu conjunto de dados
 > 
 > ° **25%, 50% e 75%**: os quartis do seu conjunto de dados
+
+## Medidas de correlação entre pares de dados
+
+Muitas vezes, você precisará examinar a relação entre os elementos correspondentes de duas variáveis em um conjunto de dados. Digamos que existam duas variáveis, 𝑥 e 𝑦, com um número igual de elementos, 𝑛. Deixe 𝑥₁ de 𝑥 corresponder a 𝑦₁ de 𝑦, 𝑥₂ de 𝑥 a 𝑦₂ de 𝑦 e assim por diante.
+Você pode então dizer que existem 𝑛 pares de elementos correspondentes: (𝑥₁, 𝑦₁), (𝑥₂, 𝑦₂), e assim por diante.
+
+Você verá as seguintes **medidas de correlação** entre pares de dados:
+
+> ° **Correlação Positiva** existe quando valores maiores de 𝑥 correspondem a valores maiores de 𝑦 e vice-versa.
+> ° Existe **Correlação Negativa** quando valores maiores de 𝑥 correspondem a valores menores de 𝑦 e vice-versa.
+> ° **Fraca ou nenhuma Correlação** existe se não houver tal relação aparente.
+
+A figura a seguir mostra exemplos de correlação negativa, fraca e positiva:
+
+![img1](https://files.realpython.com/media/py-stats-08.5a1e9f3e3aa4.png)
+
+O gráfico à esquerda com os pontos vermelhos mostra correlação negativa. O gráfico no meio com os pontos verdes mostra correlação fraca. Por fim, o gráfico à direita com os pontos azuis mostra correlação positiva.
+
+> **Nota**: Há uma coisa importante que você deve sempre ter em mente ao trabalhar com correlação entre um par de variáveis, e é que a **correlação não é uma medida ou indicador de causalidade**, mas apenas de associação!
+
+As duas estatísticas que medem a correlação entre conjuntos de dados são a **covariância** e o **coeficiente de correlação**. Vamos definir alguns dados para trabalhar com essas medidas. Você criará duas listas Python e as usará para obter matrizes NumPy correspondentes e séries Pandas:
+
+```python
+x = list(range(-10, 11))
+y = [0, 2, 2, 2, 2, 3, 3, 6, 7, 4, 7, 6, 6, 9, 4, 5, 5, 10, 11, 12, 14]
+x1, y1 = np.array(x), np.array(y)
+x2, y2 = pd.Series(x1), pd.Series(y1)
+```
+
+Agora que você tem as duas variáveis, pode começar a explorar a relação entre elas.

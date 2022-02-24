@@ -416,3 +416,8 @@ min      -5.000000
 max      41.000000
 dtype: float64
 """
+
+x = list(range(-10, 11))
+y = [0, 2, 2, 2, 2, 3, 3, 6, 7, 4, 7, 6, 6, 9, 4, 5, 5, 10, 11, 12, 14]
+x1, y1 = np.array(x), np.array(y)
+x2, y2 = pd.Series(x1), pd.Series(y1)
