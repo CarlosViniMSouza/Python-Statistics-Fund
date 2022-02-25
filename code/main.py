@@ -445,3 +445,42 @@ print(cov_xy)
 cov_xy = y2.cov(x2)
 print(cov_xy)
 # output: 19.95
+
+x_var = sum((item - x_mean)**2 for item in x) / (n - 1)
+y_var = sum((item - y_mean)**2 for item in y) / (n - 1)
+
+x_std, y_std = x_var ** 0.5, y_var ** 0.5
+cor_cof = cov_xy / (x_std * y_std)
+
+print(cor_cof)
+# output: 0.861950005631606
+
+cor_cof, p_value = scipy.stats.pearsonr(x1, y1)
+
+print(cor_cof, "\n", p_value)
+# output:
+# 0.861950005631606
+# 5.122760847201171e-07
+
+corr_matrix = np.corrcoef(x1, y1)
+
+print(corr_matrix)
+# output: array([[1.        , 0.86195001],
+#               [0.86195001, 1.        ]])
+
+scipy.stats.linregress(x_, y_)
+# output: LinregressResult(slope=0.5181818181818181, intercept=5.714285714285714, rvalue=0.861950005631606, pvalue=5.122760847201164e-07, stderr=0.06992387660074979)
+
+result = scipy.stats.linregress(x1, y1)
+cor_cof = result.rvalue
+
+print(cor_cof)
+# output: 0.861950005631606
+
+cor_cof = x2.corr(y2)
+print(cor_cof)
+# output: 0.8619500056316061
+
+cor_cof = y2.corr(x2)
+print(cor_cof)
+# output: 0.861950005631606

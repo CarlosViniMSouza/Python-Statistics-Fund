@@ -1133,3 +1133,84 @@ print(cov_xy)
 ```
 
 Aqui, você chama `.cov()` em um objeto `Series` e passa o outro objeto como o primeiro argumento.
+
+### Coeficiente de Correlação
+
+O **coeficiente de correlação**, ou **coeficiente de correlação produto-momento de Pearson**, é indicado pelo símbolo 𝑟. O coeficiente é outra medida da correlação entre os dados. Você pode pensar nisso como uma covariância padronizada. Aqui estão alguns fatos importantes sobre isso:
+
+> ° **O valor 𝑟 > 0** indica correlação positiva.
+> ° **O valor 𝑟 < 0** indica correlação negativa.
+> ° **O valor r = 1** é o valor máximo possível de 𝑟. Corresponde a uma relação linear positiva perfeita entre as variáveis.
+> ° **O valor r = −1** é o valor mínimo possível de 𝑟. Corresponde a uma relação linear negativa perfeita entre as variáveis.
+> ° **O valor r ≈ 0**, ou quando 𝑟 é próximo de zero, significa que a correlação entre as variáveis é fraca.
+
+A fórmula matemática para o coeficiente de correlação é 𝑟 = 𝑠ˣʸ / (𝑠ˣ𝑠ʸ) onde 𝑠ˣ e 𝑠ʸ são os desvios padrão de 𝑥 e 𝑦 respectivamente. Se você tiver as médias (média_x e média_y) e desvios padrão (std_x, std_y) para os conjuntos de dados x e y, bem como sua covariância cov_xy, então você pode calcular o coeficiente de correlação com Python puro:
+
+```python
+x_var = sum((item - x_mean)**2 for item in x) / (n - 1)
+y_var = sum((item - y_mean)**2 for item in y) / (n - 1)
+
+x_std, y_std = x_var ** 0.5, y_var ** 0.5
+cor_cof = cov_xy / (x_std * y_std)
+
+print(cor_cof)
+# output: 0.861950005631606
+```
+
+Você tem a variável r que representa o coeficiente de correlação.
+
+scipy.stats tem a rotina [pearsonr()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html) que calcula o coeficiente de correlação e o [valor 𝑝](https://en.wikipedia.org/wiki/P-value):
+
+```python
+cor_cof, p_value = scipy.stats.pearsonr(x1, y1)
+
+print(cor_cof, "\n", p_value)
+# output:
+# 0.861950005631606
+# 5.122760847201171e-07
+```
+
+`pearsonr()` retorna uma tupla com dois números. O primeiro é 𝑟 e o segundo é o valor 𝑝.
+
+Semelhante ao caso da matriz de covariância, você pode aplicar [np.corrcoef()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.corrcoef.html) com x1 e y1 como argumentos e obter a matriz de **coeficientes de correlação**:
+
+```python
+corr_matrix = np.corrcoef(x1, y1)
+
+print(corr_matrix)
+# output: array([[1.        , 0.86195001],
+#               [0.86195001, 1.        ]])
+```
+
+Você pode obter o coeficiente de correlação com [scipy.stats.linregress()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html):
+
+```python
+scipy.stats.linregress(x_, y_)
+# output: LinregressResult(slope=0.5181818181818181, intercept=5.714285714285714, rvalue=0.861950005631606, pvalue=5.122760847201164e-07, stderr=0.06992387660074979)
+```
+
+`linregress()` pega x1 e y1, executa a [regressão linear](https://realpython.com/linear-regression-in-python/) e retorna os resultados. inclinação e interceptação definem a equação da linha de regressão, enquanto `cor_cof` é o coeficiente de correlação. Para acessar valores específicos do resultado de `linregress()`, incluindo o coeficiente de correlação, use a notação de ponto:
+
+```python
+result = scipy.stats.linregress(x1, y1)
+cor_cof = result.rvalue
+
+print(cor_cof)
+# output: 0.861950005631606
+```
+
+É assim que você pode realizar a regressão linear e obter o coeficiente de correlação.
+
+A `série Pandas` tem o método [.corr()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.corr.html) para calcular o coeficiente de correlação:
+
+```python
+cor_cof = x2.corr(y2)
+print(cor_cof)
+# output: 0.8619500056316061
+
+cor_cof = y2.corr(x2)
+print(cor_cof)
+# output: 0.861950005631606
+```
+
+Você deve chamar `.corr()` em um objeto `Series` e passar o outro objeto como o primeiro argumento.
