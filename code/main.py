@@ -513,3 +513,27 @@ print(np.median(vector))
 
 print(vector.var(ddof=1))
 # output: 53.40000000000001
+
+print(np.mean(vector, axis=0))
+# output: array([6.2, 8.2, 1.8])
+
+print(vector.mean(axis=0))
+# output: array([6.2, 8.2, 1.8])
+
+print(np.mean(vector, axis=1))
+# output: array([ 1.,  2.,  5., 13.,  6.])
+
+print(vector.mean(axis=1))
+# output: array([ 1.,  2.,  5., 13.,  6.])
+
+print(np.median(vector, axis=0))
+# output: array([4., 3., 1.])
+
+print(np.median(vector, axis=1))
+# output: array([1., 2., 4., 8., 1.])
+
+print(vector.var(axis=0, ddof=1))
+# output: array([ 37.2, 121.2,   1.7])
+
+print(vector.var(axis=1, ddof=1))
+# output: array([  0.,   1.,  13., 151.,  75.])

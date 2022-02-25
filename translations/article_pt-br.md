@@ -1235,7 +1235,7 @@ Os estatísticos geralmente trabalham com dados 2D. Aqui estão alguns exemplos 
 
 NumPy e SciPy fornecem meios abrangentes para trabalhar com dados 2D. Pandas tem a classe `DataFrame` especificamente para lidar com dados rotulados 2D.
 
-## Axes
+## Eixos
 
 Comece criando um array NumPy 2D:
 
@@ -1278,6 +1278,50 @@ Como você pode ver, você obtém estatísticas (como média, mediana ou variân
 
 As funções e métodos que você usou até agora têm um parâmetro opcional chamado axis, que é essencial para lidar com dados 2D. eixo pode assumir qualquer um dos seguintes valores:
 
-> ° axis=None diz para calcular as estatísticas em todos os dados da matriz. Os exemplos acima funcionam assim. Esse comportamento geralmente é o padrão no NumPy.
-> ° axis=0 diz para calcular as estatísticas em todas as linhas, ou seja, para cada coluna da matriz. Esse comportamento geralmente é o padrão para funções estatísticas do SciPy.
-> ° axis=1 diz para calcular as estatísticas em todas as colunas, ou seja, para cada linha da matriz.
+> ° **axis=None** diz para calcular as estatísticas em todos os dados da matriz. Os exemplos acima funcionam assim. Esse comportamento geralmente é o padrão no NumPy.
+> 
+> ° **axis=0** diz para calcular as estatísticas em todas as linhas, ou seja, para cada coluna da matriz. Esse comportamento geralmente é o padrão para funções estatísticas do SciPy.
+> 
+> ° **axis=1** diz para calcular as estatísticas em todas as colunas, ou seja, para cada linha da matriz.
+
+Vamos ver `axis=0` em ação com `np.mean()`:
+
+```python
+print(np.mean(vector, axis=0))
+# output: array([6.2, 8.2, 1.8])
+
+print(vector.mean(axis=0))
+# output: array([6.2, 8.2, 1.8])
+```
+
+As duas instruções acima retornam novos arrays NumPy com a média para cada coluna de a. Neste exemplo, a média da primeira coluna é 6.2 . A segunda coluna tem a média de 8.2, enquanto a terceira tem 1.8 .
+
+Se você fornecer `axis=1` para `mean()`, obterá os resultados para cada linha:
+
+```python
+print(np.mean(vector, axis=1))
+# output: array([ 1.,  2.,  5., 13.,  6.])
+
+print(vector.mean(axis=1))
+# output: array([ 1.,  2.,  5., 13.,  6.])
+```
+
+Como você pode ver, a primeira linha de a tem a média 1.0 , a segunda 2.0 e assim por diante.
+
+> **Nota**: você pode estender essas regras para arrays multi-dimensionais, mas isso está além do escopo deste tutorial. Sinta-se à vontade para mergulhar neste tópico por conta própria!
+
+O **eixo** do parâmetro funciona da mesma maneira com outras funções e métodos NumPy:
+
+```python
+print(np.median(vector, axis=0))
+# output: array([4., 3., 1.])
+
+print(np.median(vector, axis=1))
+# output: array([1., 2., 4., 8., 1.])
+
+print(vector.var(axis=0, ddof=1))
+# output: array([ 37.2, 121.2,   1.7])
+
+print(vector.var(axis=1, ddof=1))
+# output: array([  0.,   1.,  13., 151.,  75.])
+```
