@@ -484,3 +484,32 @@ print(cor_cof)
 cor_cof = y2.corr(x2)
 print(cor_cof)
 # output: 0.861950005631606
+
+vector = np.array([[1, 1, 1],
+                   [2, 3, 1],
+                   [4, 9, 2],
+                   [8, 27, 4],
+                   [16, 1, 1]])
+
+print(vector)
+"""
+output:
+
+array([[ 1,  1,  1],
+       [ 2,  3,  1],
+       [ 4,  9,  2],
+       [ 8, 27,  4],
+       [16,  1,  1]])
+"""
+
+print(np.mean(vector))
+# output: 5.4
+
+print(vector.mean())
+# output: 5.4
+
+print(np.median(vector))
+# output: 2.0
+
+print(vector.var(ddof=1))
+# output: 53.40000000000001

@@ -1056,7 +1056,9 @@ Você pode então dizer que existem 𝑛 pares de elementos correspondentes: (�
 Você verá as seguintes **medidas de correlação** entre pares de dados:
 
 > ° **Correlação Positiva** existe quando valores maiores de 𝑥 correspondem a valores maiores de 𝑦 e vice-versa.
+> 
 > ° Existe **Correlação Negativa** quando valores maiores de 𝑥 correspondem a valores menores de 𝑦 e vice-versa.
+> 
 > ° **Fraca ou nenhuma Correlação** existe se não houver tal relação aparente.
 
 A figura a seguir mostra exemplos de correlação negativa, fraca e positiva:
@@ -1083,7 +1085,9 @@ Agora que você tem as duas variáveis, pode começar a explorar a relação ent
 A **covariância da amostra** é uma medida que quantifica a força e a direção de uma relação entre um par de variáveis:
 
 > ° **Se a correlação for positiva**, então a covariância também será positiva. Uma relação mais forte corresponde a um valor mais alto da covariância.
+> 
 > ° **Se a correlação for negativa**, a covariância também será negativa. Uma relação mais forte corresponde a um valor mais baixo (ou mais alto absoluto) da covariância.
+> 
 > ° **Se a correlação for fraca**, então a covariância é próxima de zero.
 
 A covariância das variáveis 𝑥 e 𝑦 é matematicamente definida como 𝑠ˣʸ = Σᵢ (𝑥ᵢ − média(𝑥)) (𝑦ᵢ − média(𝑦)) / (𝑛 − 1), onde 𝑖 = 1, 2, …, 𝑛, média (𝑥) é a média amostral de 𝑥 e a média(𝑦) é a média amostral de 𝑦. Segue-se que a covariância de duas variáveis idênticas é na verdade a variância: 𝑠ˣˣ = Σᵢ(𝑥ᵢ − média(𝑥))² / (𝑛 − 1) = (𝑠ˣ)² e 𝑠ʸʸ = Σᵢ(𝑦ᵢ − média(𝑦))² / (𝑛 − 1) = (𝑠ʸ)².
@@ -1139,9 +1143,13 @@ Aqui, você chama `.cov()` em um objeto `Series` e passa o outro objeto como o p
 O **coeficiente de correlação**, ou **coeficiente de correlação produto-momento de Pearson**, é indicado pelo símbolo 𝑟. O coeficiente é outra medida da correlação entre os dados. Você pode pensar nisso como uma covariância padronizada. Aqui estão alguns fatos importantes sobre isso:
 
 > ° **O valor 𝑟 > 0** indica correlação positiva.
+> 
 > ° **O valor 𝑟 < 0** indica correlação negativa.
+> 
 > ° **O valor r = 1** é o valor máximo possível de 𝑟. Corresponde a uma relação linear positiva perfeita entre as variáveis.
+> 
 > ° **O valor r = −1** é o valor mínimo possível de 𝑟. Corresponde a uma relação linear negativa perfeita entre as variáveis.
+> 
 > ° **O valor r ≈ 0**, ou quando 𝑟 é próximo de zero, significa que a correlação entre as variáveis é fraca.
 
 A fórmula matemática para o coeficiente de correlação é 𝑟 = 𝑠ˣʸ / (𝑠ˣ𝑠ʸ) onde 𝑠ˣ e 𝑠ʸ são os desvios padrão de 𝑥 e 𝑦 respectivamente. Se você tiver as médias (média_x e média_y) e desvios padrão (std_x, std_y) para os conjuntos de dados x e y, bem como sua covariância cov_xy, então você pode calcular o coeficiente de correlação com Python puro:
@@ -1220,7 +1228,56 @@ Você deve chamar `.corr()` em um objeto `Series` e passar o outro objeto como o
 Os estatísticos geralmente trabalham com dados 2D. Aqui estão alguns exemplos de formatos de dados 2D:
 
 > ° Tabelas de [banco de dados](https://realpython.com/tutorials/databases/)
+> 
 > ° [Arquivos CSV](https://realpython.com/python-csv/)
+> 
 > ° [Planilhas](https://realpython.com/openpyxl-excel-spreadsheets-python/) [Excel](https://realpython.com/working-with-large-excel-files-in-pandas/), Calc e Google
 
 NumPy e SciPy fornecem meios abrangentes para trabalhar com dados 2D. Pandas tem a classe `DataFrame` especificamente para lidar com dados rotulados 2D.
+
+## Axes
+
+Comece criando um array NumPy 2D:
+
+```python
+vector = np.array([[1, 1, 1],
+                   [2, 3, 1],
+                   [4, 9, 2],
+                   [8, 27, 4],
+                   [16, 1, 1]])
+
+print(vector)
+"""
+output:
+
+array([[ 1,  1,  1],
+       [ 2,  3,  1],
+       [ 4,  9,  2],
+       [ 8, 27,  4],
+       [16,  1,  1]])
+"""
+```
+
+Agora você tem um conjunto de dados 2D, que você usará nesta seção. Você pode aplicar funções e métodos de estatísticas do Python a ele da mesma forma que faria com dados 1D:
+
+```python
+print(np.mean(vector))
+# output: 5.4
+
+print(vector.mean())
+# output: 5.4
+
+print(np.median(vector))
+# output: 2.0
+
+print(vector.var(ddof=1))
+# output: 53.40000000000001
+```
+
+Como você pode ver, você obtém estatísticas (como média, mediana ou variância) em todos os dados da matriz a. Às vezes, esse comportamento é o que você deseja, mas em alguns casos, você deseja que essas quantidades sejam calculadas para cada linha ou coluna de sua matriz 2D.
+
+As funções e métodos que você usou até agora têm um parâmetro opcional chamado axis, que é essencial para lidar com dados 2D. eixo pode assumir qualquer um dos seguintes valores:
+
+> ° axis=None diz para calcular as estatísticas em todos os dados da matriz. Os exemplos acima funcionam assim. Esse comportamento geralmente é o padrão no NumPy.
+> ° axis=0 diz para calcular as estatísticas em todas as linhas, ou seja, para cada coluna da matriz. Esse comportamento geralmente é o padrão para funções estatísticas do SciPy.
+> ° axis=1 diz para calcular as estatísticas em todas as colunas, ou seja, para cada linha da matriz.
