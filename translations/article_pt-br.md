@@ -8,7 +8,7 @@ A **estatística descritiva** trata de descrever e resumir dados. Ele usa duas a
 
 Você pode aplicar estatísticas descritivas a um ou vários conjuntos de dados ou [variáveis](https://realpython.com/python-variables/). Quando você descreve e resume uma única variável, está realizando uma **análise univariada**. Ao pesquisar relacionamentos estatísticos entre um par de variáveis, você está fazendo uma **análise bivariada**. Similarmente, uma **análise multivariada** está preocupada com múltiplas variáveis ao mesmo tempo.
 
-### Tipos de Medidas:
+## Tipos de Medidas:
 
 Neste tutorial, você aprenderá sobre os seguintes tipos de medidas em estatísticas descritivas:
 
@@ -20,13 +20,13 @@ Neste tutorial, você aprenderá sobre os seguintes tipos de medidas em estatís
 
 Você aprenderá a entender e calcular essas medidas com Python.
 
-### População e Amostras:
+## População e Amostras:
 
 Nas estatísticas, a **população** é um conjunto de todos os elementos ou itens nos quais você está interessado. As populações geralmente são vastas, o que as torna inadequadas para coletar e analisar dados. É por isso que os estatísticos geralmente tentam tirar algumas conclusões sobre uma população escolhendo e examinando um subconjunto representativo dessa população.
 
 Esse subconjunto de uma população é chamado de **amostra**. Idealmente, a amostra deve preservar as características estatísticas essenciais da população de forma satisfatória. Dessa maneira, você poderá usar a amostra para obter conclusões sobre a população.
 
-### Outlier(Atípicos):
+## Outlier(Atípicos):
 
 Um **outlier** é um ponto de dados que difere significativamente da maioria dos dados obtidos de uma amostra ou população. Existem muitas causas possíveis de discrepâncias, mas aqui estão algumas para você começar:
 
@@ -40,7 +40,7 @@ Erros de coleta de dados são uma causa particularmente proeminente de discrepâ
 
 Não há uma definição matemática precisa de outliers. Você precisa confiar na experiência, no conhecimento sobre o assunto de interesse e no bom senso para determinar se um ponto de dados é um valor discrepante e como lidar com isso.
 
-## Escolhendo Bibliotecas de Estatísticas Python:
+# Escolhendo Bibliotecas de Estatísticas Python:
 
 Existem muitas bibliotecas de estatísticas Python para você trabalhar, mas neste tutorial, você aprenderá sobre algumas das mais populares e amplamente usadas:
 
@@ -56,7 +56,7 @@ Existem muitas bibliotecas de estatísticas Python para você trabalhar, mas nes
 
 Observe que, em muitos casos, objetos Series e [DataFrame](https://realpython.com/pandas-dataframe/) podem ser usados no lugar de arrays NumPy. Muitas vezes, você pode simplesmente passá-los para uma função estatística NumPy ou [SciPy](https://realpython.com/python-scipy-cluster-optimize/). Além disso, você pode obter os dados não rotulados de um Series ou DataFrame como um objeto np.ndarray chamando [.values](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.values.html) ou [.to_numpy()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html).
 
-## Introdução às bibliotecas de estatísticas do Python:
+# Introdução às bibliotecas de estatísticas do Python:
 
 A biblioteca de `estatísticas` embutida do Python possui um número relativamente pequeno das funções estatísticas mais importantes. A [documentação oficial](https://docs.python.org/3/library/statistics.html) é um recurso valioso para encontrar os detalhes. Se você está limitado ao Python puro, a biblioteca de `estatísticas` do Python pode ser a escolha certa.
 
@@ -94,7 +94,7 @@ O `matplotlib` possui um [Guia do Usuário oficial](https://matplotlib.org/users
 
 Vamos começar a usar essas bibliotecas de estatísticas do Python!
 
-## Calculando Estatísticas Descritivas:
+# Calculando Estatísticas Descritivas:
 
 Comece importando todos os pacotes que você vai precisar:
 
@@ -186,7 +186,7 @@ Agora você tem dois arrays NumPy (y e y_with_nan) e dois Pandas Series (`z e z_
 
 Você pode opcionalmente especificar um rótulo para cada valor em `z e z_with_nan`.
 
-### Medidas de tendência central:
+## Medidas de tendência central:
 
 As medidas de tendência central mostram os valores centrais ou médios dos conjuntos de dados. Existem várias definições do que é considerado o centro de um conjunto de dados. Neste tutorial, você aprenderá a identificar e calcular essas medidas de tendência central:
 
@@ -280,7 +280,7 @@ print(np.nanmean(y_with_nan))
 
 `nanmean()` simplesmente ignora todos os valores `nan`. Ele retorna o mesmo valor que `mean()` se você o aplicasse ao conjunto de dados sem os valores `nan`.
 
-## Média Ponderada
+### Média Ponderada
 
 A **média ponderada**, também chamada de **média aritmética ponderada** ou **média ponderada**, é uma generalização da média aritmética que permite definir a contribuição relativa de cada ponto de dados para o resultado.
 
@@ -350,7 +350,7 @@ print(np.average(z_with_nan, weights=w))
 ```
 Nesse caso, `average()` retorna `nan`, que é consistente com `np.mean()`.
 
-## Média Harmônica:
+### Média Harmônica:
 
 A **média harmônica** é a recíproca da média das recíprocas de todos os itens no conjunto de dados: 𝑛 / Σᵢ(1/𝑥ᵢ), onde 𝑖 = 1, 2, …, 𝑛 e 𝑛 é o número de itens no conjunto de dados 𝑥. Uma variante da implementação Python pura da média harmônica é esta:
 
@@ -387,7 +387,7 @@ scipy.stats.hmean(z)
 
 Novamente, esta é uma implementação bastante simples. No entanto, se seu conjunto de dados contiver nan, 0, um número negativo ou qualquer coisa menos números [positivos](https://realpython.com/python-numbers/), você receberá um [ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)!
 
-## Média Geométrica:
+### Média Geométrica:
 
 A **média geométrica** é a 𝑛-ésima raiz do produto de todos os 𝑛 elementos 𝑥ᵢ em um conjunto de dados 𝑥: ⁿ√(Πᵢ𝑥ᵢ), onde 𝑖 = 1, 2, …, 𝑛. A figura a seguir ilustra as médias aritméticas, harmônicas e geométricas de um conjunto de dados:
 
@@ -442,7 +442,7 @@ Você obteve o mesmo resultado com a implementação pura do Python.
 
 Se você tiver valores nan em um conjunto de dados, `gmean()` retornará nan. Se houver pelo menos um 0, ele retornará 0.0 e dará um aviso. Se você fornecer pelo menos um número negativo, receberá nan e o aviso.
 
-## Mediana
+### Mediana
 
 A **mediana da amostra** é o elemento central de um conjunto de dados classificado. O conjunto de dados pode ser classificado em ordem crescente ou decrescente. Se o número de elementos 𝑛 do conjunto de dados for ímpar, então a mediana é o valor na posição do meio: 0,5(𝑛 + 1). Se 𝑛 for par, então a mediana é a média aritmética dos dois valores no meio, ou seja,
 os itens nas posições 0,5𝑛 e 0,5𝑛 + 1.
@@ -532,7 +532,7 @@ print(z_with_nan.median())
 
 O comportamento de `.median()` é consistente com `.mean()` em Pandas. Você pode alterar esse comportamento com o parâmetro opcional `skipna`.
 
-## Moda
+### Moda
 
 O **modo de amostra** é o valor no conjunto de dados que ocorre com mais frequência. Se não houver um único valor desse tipo, o conjunto será **multimodal**, pois possui vários valores modais. Por exemplo, no conjunto que contém os pontos 2, 3, 2, 8 e 12, o número 2 é a moda porque ocorre duas vezes, ao contrário dos demais itens que ocorrem apenas uma vez.
 
@@ -1214,3 +1214,13 @@ print(cor_cof)
 ```
 
 Você deve chamar `.corr()` em um objeto `Series` e passar o outro objeto como o primeiro argumento.
+
+# Trabalhando com dados 2D
+
+Os estatísticos geralmente trabalham com dados 2D. Aqui estão alguns exemplos de formatos de dados 2D:
+
+> ° Tabelas de [banco de dados](https://realpython.com/tutorials/databases/)
+> ° [Arquivos CSV](https://realpython.com/python-csv/)
+> ° [Planilhas](https://realpython.com/openpyxl-excel-spreadsheets-python/) [Excel](https://realpython.com/working-with-large-excel-files-in-pandas/), Calc e Google
+
+NumPy e SciPy fornecem meios abrangentes para trabalhar com dados 2D. Pandas tem a classe `DataFrame` especificamente para lidar com dados rotulados 2D.
