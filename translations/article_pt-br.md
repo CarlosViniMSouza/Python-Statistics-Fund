@@ -1274,7 +1274,7 @@ print(vector.var(ddof=1))
 # output: 53.40000000000001
 ```
 
-Como você pode ver, você obtém estatísticas (como média, mediana ou variância) em todos os dados da matriz a. Às vezes, esse comportamento é o que você deseja, mas em alguns casos, você deseja que essas quantidades sejam calculadas para cada linha ou coluna de sua matriz 2D.
+Como você pode ver, você obtém estatísticas (como média, mediana ou variância) em todos os dados da matriz `vector`. Às vezes, esse comportamento é o que você deseja, mas em alguns casos, você deseja que essas quantidades sejam calculadas para cada linha ou coluna de sua matriz 2D.
 
 As funções e métodos que você usou até agora têm um parâmetro opcional chamado axis, que é essencial para lidar com dados 2D. eixo pode assumir qualquer um dos seguintes valores:
 
@@ -1294,7 +1294,7 @@ print(vector.mean(axis=0))
 # output: array([6.2, 8.2, 1.8])
 ```
 
-As duas instruções acima retornam novos arrays NumPy com a média para cada coluna de a. Neste exemplo, a média da primeira coluna é 6.2 . A segunda coluna tem a média de 8.2, enquanto a terceira tem 1.8 .
+As duas instruções acima retornam novos arrays NumPy com a média para cada coluna de `vector`. Neste exemplo, a média da primeira coluna é 6.2 . A segunda coluna tem a média de 8.2, enquanto a terceira tem 1.8 .
 
 Se você fornecer `axis=1` para `mean()`, obterá os resultados para cada linha:
 
@@ -1325,3 +1325,36 @@ print(vector.var(axis=0, ddof=1))
 print(vector.var(axis=1, ddof=1))
 # output: array([  0.,   1.,  13., 151.,  75.])
 ```
+
+Você tem as medianas e variações de amostra para todas as colunas (eixo=0) e linhas (eixo=1) da matriz `vector`.
+
+Isso é muito semelhante quando você trabalha com funções estatísticas do SciPy. Mas lembre-se que neste caso, o valor padrão para o `eixo` é 0:
+
+```python
+print(scipy.stats.gmean(vector))  # here, the default is axis=0
+# output: array([4.        , 3.73719282, 1.51571657])
+```
+
+Se você omitir axis ou fornecer `axis=0`, obterá o resultado em todas as linhas, ou seja, para cada coluna. Por exemplo, a primeira coluna de a tem uma média geométrica de 4.0 e assim por diante.
+
+Se você especificar `axis=1`, obterá os cálculos em todas as colunas, ou seja, para cada linha:
+
+```python
+print(scipy.stats.gmean(a, axis=1))
+# output: array([1.        , 1.81712059, 4.16016765, 9.52440631, 2.5198421 ])
+```
+
+Você pode obter um resumo das estatísticas do Python com uma única chamada de função para dados 2D com [scipy.stats.describe()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.describe.html). Funciona de forma semelhante aos arrays 1D, mas você deve ter cuidado com o `eixo` do parâmetro:
+
+```python
+print(scipy.stats.describe(vector, axis=None, ddof=1, bias=False))
+# output: DescribeResult(nobs=15, minmax=(1, 27), mean=5.4, variance=53.40000000000001, skewness=2.264965290423389, kurtosis=5.212690982795767)
+
+print(scipy.stats.describe(vector, ddof=1, bias=False))  # axis=0 by default
+# output: DescribeResult(nobs=5, minmax=(array([1, 1, 1]), array([16, 27,  4])), mean=array([6.2, 8.2, 1.8]), variance=array([ 37.2, 121.2,   1.7]), skewness=array([1.32531471, 1.79809454, 1.71439233]), kurtosis=array([1.30376344, 3.14969121, 2.66435986]))
+
+print(scipy.stats.describe(vector, axis=1, ddof=1, bias=False))
+# output: DescribeResult(nobs=3, minmax=(array([1, 1, 2, 4, 1]), array([ 1,  3,  9, 27, 16])), mean=array([ 1.,  2.,  5., 13.,  6.]), variance=array([  0.,   1.,  13., 151.,  75.]), skewness=array([0.        , 0.        , 1.15206964, 1.52787436, 1.73205081]), kurtosis=array([-3. , -1.5, -1.5, -1.5, -1.5]))
+```
+
+Ao fornecer `axis=None`, você obtém o resumo de todos os dados. A maioria dos resultados são escalares. Se você definir `axis=0` ou omiti-lo, o valor de retorno será o resumo de cada coluna. Assim, a maioria dos resultados são os arrays com o mesmo número de itens que o número de colunas. Se você definir `axis=1`, o `describe()` retornará o resumo de todas as linhas.
