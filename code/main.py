@@ -3,6 +3,7 @@ import statistics
 import numpy as np
 import scipy.stats
 import pandas as pd
+import matplotlib.pyplot as plt
 
 x_list = [8.0, 1, 2.5, 4, 28.0]
 x_with_nan = [8.0, 1, 2.5, math.nan, 4, 28.0]
@@ -379,8 +380,10 @@ result = scipy.stats.describe(y, ddof=1, bias=False)
 print(result)
 # output: DescribeResult(nobs=9, minmax=(-5.0, 41.0), mean=11.622222222222222, variance=228.75194444444446, skewness=0.9249043136685094, kurtosis=0.14770623629658886)
 
+"""
 print(result.nobs())
 # output: 9
+"""
 
 print(result.minmax[0])
 # output: -5.0
@@ -468,7 +471,7 @@ print(corr_matrix)
 # output: array([[1.        , 0.86195001],
 #               [0.86195001, 1.        ]])
 
-scipy.stats.linregress(x_, y_)
+scipy.stats.linregress(x1, y1)
 # output: LinregressResult(slope=0.5181818181818181, intercept=5.714285714285714, rvalue=0.861950005631606, pvalue=5.122760847201164e-07, stderr=0.06992387660074979)
 
 result = scipy.stats.linregress(x1, y1)
@@ -541,7 +544,7 @@ print(vector.var(axis=1, ddof=1))
 print(scipy.stats.gmean(vector))  # here, the default is axis=0
 # output: array([4.        , 3.73719282, 1.51571657])
 
-print(scipy.stats.gmean(a, axis=1))
+print(scipy.stats.gmean(vector, axis=1))
 # output: array([1.        , 1.81712059, 4.16016765, 9.52440631, 2.5198421 ])
 
 print(scipy.stats.describe(vector, axis=None, ddof=1, bias=False))
@@ -674,4 +677,6 @@ print(df.describe().at['mean', 'A'])
 print(df.describe().at['50%', 'B'])
 # output: 3.0
 
-# TODO: DateFrames is the next topic.
+plt.style.use('ggplot')
+
+# TODO: Matplotlib is the next topic.

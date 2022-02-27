@@ -1538,3 +1538,38 @@ print(df.describe().at['50%', 'B'])
 ```
 
 É assim que você pode obter estatísticas descritivas do Python em um objeto `Series` com uma única chamada de método Pandas.
+
+# Visualização de Dados
+
+Além de calcular as quantidades numéricas como média, mediana ou variância, você pode usar métodos visuais para apresentar, descrever e resumir dados. Nesta seção, você aprenderá a apresentar seus dados visualmente usando os seguintes gráficos:
+
+> ° Gráficos de caixa
+> 
+> ° Histogramas
+> 
+> ° Gráfico de setores
+> 
+> ° Gráficos de barra
+> 
+> ° Gráficos X-Y
+> 
+> ° Mapas de calor
+
+`matplotlib.pyplot` é uma biblioteca muito conveniente e amplamente usada, embora não seja a única biblioteca Python disponível para essa finalidade. Você pode importá-lo assim:
+
+```python
+import matplotlib.pyplot as plt
+
+print(plt.style.use('ggplot'))
+```
+
+Agora, você tem `matplotlib.pyplot` importado e pronto para uso. A segunda instrução define o estilo de seus gráficos escolhendo cores, larguras de linha e outros elementos estilísticos. Você pode omiti-los se estiver satisfeito com as configurações de estilo padrão.
+
+> **Nota**: Esta seção se concentra na **representação de dados** e mantém as configurações estilísticas no mínimo. Você verá links para a documentação oficial de rotinas usadas em `matplotlib.pyplot`, para poder explorar as opções que não verá aqui.
+
+Você usará [números pseudo-aleatórios](https://realpython.com/courses/generating-random-data-python/) para obter dados para trabalhar. Você não precisa de conhecimento sobre [números aleatórios](https://realpython.com/lessons/randomness-modeling-and-simulation/) para poder entender esta seção. Você só precisa de alguns números arbitrários, e geradores pseudo-aleatórios são uma ferramenta conveniente para obtê-los. O módulo [np.random](https://docs.scipy.org/doc/numpy-1.16.0/reference/routines.random.html) gera arrays de números pseudo-aleatórios:
+
+> ° [Números normalmente distribuídos](https://en.wikipedia.org/wiki/Normal_distribution) são gerados com [np.random.randn()](https://docs.scipy.org/doc/numpy-1.16.0/reference/generated/numpy.random.randn.html).
+> ° [Inteiros uniformemente distribuídos](https://en.wikipedia.org/wiki/Discrete_uniform_distribution) são gerados com [np.random.randint()](https://docs.scipy.org/doc/numpy-1.16.0/reference/generated/numpy.random.randint.html).
+
+O NumPy 1.17 introduziu outro [módulo](https://numpy.org/devdocs/release/1.17.0-notes.html#new-extensible-numpy-random-module-with-selectable-random-number-generators) para geração de números pseudo-aleatórios. Para saber mais sobre isso, consulte a [documentação oficial](https://docs.scipy.org/doc/numpy/reference/random/generator.html).
