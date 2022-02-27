@@ -1358,3 +1358,81 @@ print(scipy.stats.describe(vector, axis=1, ddof=1, bias=False))
 ```
 
 Ao fornecer `axis=None`, você obtém o resumo de todos os dados. A maioria dos resultados são escalares. Se você definir `axis=0` ou omiti-lo, o valor de retorno será o resumo de cada coluna. Assim, a maioria dos resultados são os arrays com o mesmo número de itens que o número de colunas. Se você definir `axis=1`, o `describe()` retornará o resumo de todas as linhas.
+
+## DataFrames
+
+A classe `DataFrame` é um dos tipos de dados fundamentais do Pandas. É muito confortável de trabalhar porque possui rótulos para linhas e colunas. Use o array a e crie um `DataFrame`:
+
+```python
+row_names = ['first', 'second', 'third', 'fourth', 'fifth']
+col_names = ['A', 'B', 'C']
+
+df = pd.DataFrame(vector, index=row_names,columns=col_names)
+print(df)
+"""
+output:
+
+         A   B  C
+first    1   1  1
+second   2   3  1
+third    4   9  2
+fourth   8  27  4
+fifth   16   1  1
+"""
+```
+
+Na prática, os nomes das colunas são importantes e devem ser descritivos. Os nomes das linhas às vezes são especificados automaticamente como 0, 1 e assim por diante. Você pode especificá-los explicitamente com o parâmetro `index`, embora seja livre para omitir `index` se quiser.
+
+Os métodos `DataFrame` são muito semelhantes aos métodos Series, embora o comportamento seja diferente. Se você chamar métodos de estatísticas do Python sem argumentos, o `DataFrame` retornará os resultados de cada coluna:
+
+```python
+print(df.mean())
+"""
+output:
+
+A    6.2
+B    8.2
+C    1.8
+dtype: float64
+"""
+
+print(df.var())
+"""
+output:
+
+A     37.2
+B    121.2
+C      1.7
+dtype: float64
+"""
+```
+
+O que você obtém é uma nova `Série` que mantém os resultados. Nesse caso, a `Série` contém a média e a variância de cada coluna. Se você deseja os resultados para cada linha, basta especificar o parâmetro `axis=1`:
+
+```python
+df.mean(axis=1)
+"""
+output: 
+
+first      1.0
+second     2.0
+third      5.0
+fourth    13.0
+fifth      6.0
+dtype: float64
+"""
+
+df.var(axis=1)
+"""
+output: 
+
+first       0.0
+second      1.0
+third      13.0
+fourth    151.0
+fifth      75.0
+dtype: float64
+"""
+```
+
+O resultado é uma `Série` com a quantidade desejada para cada linha. Os rótulos 'primeiro', 'segundo' e assim por diante referem-se às diferentes linhas.

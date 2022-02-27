@@ -553,4 +553,64 @@ print(scipy.stats.describe(vector, ddof=1, bias=False))  # axis=0 by default
 print(scipy.stats.describe(vector, axis=1, ddof=1, bias=False))
 # output: DescribeResult(nobs=3, minmax=(array([1, 1, 2, 4, 1]), array([ 1,  3,  9, 27, 16])), mean=array([ 1.,  2.,  5., 13.,  6.]), variance=array([  0.,   1.,  13., 151.,  75.]), skewness=array([0.        , 0.        , 1.15206964, 1.52787436, 1.73205081]), kurtosis=array([-3. , -1.5, -1.5, -1.5, -1.5]))
 
+row_names = ['first', 'second', 'third', 'fourth', 'fifth']
+col_names = ['A', 'B', 'C']
+
+df = pd.DataFrame(vector, index=row_names, columns=col_names)
+print(df)
+"""
+output:
+
+         A   B  C
+first    1   1  1
+second   2   3  1
+third    4   9  2
+fourth   8  27  4
+fifth   16   1  1
+"""
+
+print(df.mean())
+"""
+output:
+
+A    6.2
+B    8.2
+C    1.8
+dtype: float64
+"""
+
+print(df.var())
+"""
+output:
+
+A     37.2
+B    121.2
+C      1.7
+dtype: float64
+"""
+
+df.mean(axis=1)
+"""
+output: 
+
+first      1.0
+second     2.0
+third      5.0
+fourth    13.0
+fifth      6.0
+dtype: float64
+"""
+
+df.var(axis=1)
+"""
+output: 
+
+first       0.0
+second      1.0
+third      13.0
+fourth    151.0
+fifth      75.0
+dtype: float64
+"""
+
 # TODO: DateFrames is the next topic.
