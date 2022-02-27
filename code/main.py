@@ -613,4 +613,65 @@ fifth      75.0
 dtype: float64
 """
 
+print(df['A'])
+"""
+output: 
+
+first      1
+second     2
+third      4
+fourth     8
+fifth     16
+Name: A, dtype: int64
+"""
+
+print(df['A'].mean())
+# output: 6.2
+
+print(df['A'].var())
+# output: 37.20000000000001
+
+print(df.values)
+"""
+output: 
+
+array([[ 1,  1,  1],
+       [ 2,  3,  1],
+       [ 4,  9,  2],
+       [ 8, 27,  4],
+       [16,  1,  1]])
+"""
+
+print(df.to_numpy())
+"""
+output: 
+
+array([[ 1,  1,  1],
+       [ 2,  3,  1],
+       [ 4,  9,  2],
+       [ 8, 27,  4],
+       [16,  1,  1]])
+"""
+
+print(df.describe())
+"""
+output: 
+
+              A          B        C
+count   5.00000   5.000000  5.00000
+mean    6.20000   8.200000  1.80000
+std     6.09918  11.009087  1.30384
+min     1.00000   1.000000  1.00000
+25%     2.00000   1.000000  1.00000
+50%     4.00000   3.000000  1.00000
+75%     8.00000   9.000000  2.00000
+max    16.00000  27.000000  4.00000
+"""
+
+print(df.describe().at['mean', 'A'])
+# output: 6.2
+
+print(df.describe().at['50%', 'B'])
+# output: 3.0
+
 # TODO: DateFrames is the next topic.

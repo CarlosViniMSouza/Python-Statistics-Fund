@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Topic: Working With 2D Data | Sub-Topic: DataFrames (Part1) -> add | Next Sub-Topic: DataFrames (Part2)"
+git commit -m "Topic: Working With 2D Data | Sub-Topic: DataFrames (Part2) -> add | Next Sub-Topic: Visualizing Data"
 git push
 git status

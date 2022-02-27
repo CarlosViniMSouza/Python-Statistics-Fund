@@ -1436,3 +1436,105 @@ dtype: float64
 ```
 
 O resultado é uma `Série` com a quantidade desejada para cada linha. Os rótulos 'primeiro', 'segundo' e assim por diante referem-se às diferentes linhas.
+
+Você pode isolar cada coluna do `DataFrame` dessa forma:
+
+```python
+print(df['A'])
+"""
+output: 
+
+first      1
+second     2
+third      4
+fourth     8
+fifth     16
+Name: A, dtype: int64
+"""
+```
+
+Agora, você tem a coluna 'A' na forma de um objeto `Series` e pode aplicar os métodos apropriados:
+
+```python
+print(df['A'].mean())
+# output: 6.2
+
+print(df['A'].var())
+# output: 37.20000000000001
+```
+
+É assim que você pode obter as estatísticas de uma única coluna.
+
+Às vezes, você pode querer usar um DataFrame como um array NumPy e aplicar alguma função a ele. É possível obter todos os dados de um `DataFrame` com `.values` ou `.to_numpy()`:
+
+```python
+print(df.values)
+"""
+output: 
+
+array([[ 1,  1,  1],
+       [ 2,  3,  1],
+       [ 4,  9,  2],
+       [ 8, 27,  4],
+       [16,  1,  1]])
+"""
+
+print(df.to_numpy())
+"""
+output: 
+
+array([[ 1,  1,  1],
+       [ 2,  3,  1],
+       [ 4,  9,  2],
+       [ 8, 27,  4],
+       [16,  1,  1]])
+"""
+```
+
+`df.values` e `df.to_numpy()` fornecem um array NumPy com todos os itens do `DataFrame` sem rótulos de linha e coluna. Observe que `df.to_numpy()` é mais flexível porque você pode especificar o tipo de dados dos itens e se deseja usar os dados existentes ou copiá-los.
+
+Assim como `Series`, objetos `DataFrame` possuem o método [.describe()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html) que retorna outro DataFrame com o resumo das estatísticas para todas as colunas:
+
+```python
+print(df.describe())
+
+"""
+output: 
+
+              A          B        C
+count   5.00000   5.000000  5.00000
+mean    6.20000   8.200000  1.80000
+std     6.09918  11.009087  1.30384
+min     1.00000   1.000000  1.00000
+25%     2.00000   1.000000  1.00000
+50%     4.00000   3.000000  1.00000
+75%     8.00000   9.000000  2.00000
+max    16.00000  27.000000  4.00000
+"""
+```
+
+O resumo contém os seguintes resultados:
+
+> ° **count**: o número de itens em cada coluna
+> 
+> ° **mean**: a média de cada coluna
+> 
+> ° **std**: o desvio padrão
+> 
+> ° **min e max**: os valores mínimo e máximo
+> 
+> ° **25%, 50% e 75%**: os percentis
+
+Se você quiser que o objeto `DataFrame` resultante contenha outros percentis, então você deve especificar o valor dos `percentis` do parâmetro opcional.
+
+Você pode acessar cada item do resumo assim:
+
+```python
+print(df.describe().at['mean', 'A'])
+# output: 6.2
+
+print(df.describe().at['50%', 'B'])
+# output: 3.0
+```
+
+É assim que você pode obter estatísticas descritivas do Python em um objeto `Series` com uma única chamada de método Pandas.
