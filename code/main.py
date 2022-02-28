@@ -679,4 +679,17 @@ print(df.describe().at['50%', 'B'])
 
 plt.style.use('ggplot')
 
-# TODO: Matplotlib is the next topic.
+np.random.seed(seed=0)
+
+x, y, z = np.random.randn(1000), np.random.randn(100), np.random.randn(10)
+
+fig, ax = plt.subplots()
+
+ax.boxplot((x, y, z), vert=False, showmeans=True, meanline=True,
+           labels=('x', 'y', 'z'), patch_artist=True,
+           medianprops={'linewidth': 2, 'color': 'purple'},
+           meanprops={'linewidth': 2, 'color': 'red'})
+
+plt.show()
+
+# TODO: Histograms is the next sub-topic.

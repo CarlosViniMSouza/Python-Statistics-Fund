@@ -1573,3 +1573,64 @@ Você usará [números pseudo-aleatórios](https://realpython.com/courses/genera
 > ° [Inteiros uniformemente distribuídos](https://en.wikipedia.org/wiki/Discrete_uniform_distribution) são gerados com [np.random.randint()](https://docs.scipy.org/doc/numpy-1.16.0/reference/generated/numpy.random.randint.html).
 
 O NumPy 1.17 introduziu outro [módulo](https://numpy.org/devdocs/release/1.17.0-notes.html#new-extensible-numpy-random-module-with-selectable-random-number-generators) para geração de números pseudo-aleatórios. Para saber mais sobre isso, consulte a [documentação oficial](https://docs.scipy.org/doc/numpy/reference/random/generator.html).
+
+## Gráficos de caixa
+
+O **box plot** é uma excelente ferramenta para representar visualmente estatísticas descritivas de um determinado conjunto de dados. Ele pode mostrar o intervalo, intervalo interquartil, mediana, moda, valores discrepantes e todos os quartis. Primeiro, crie alguns dados para representar com um gráfico de caixa:
+
+```python
+np.random.seed(seed=0)
+
+x, y, z = np.random.randn(1000), np.random.randn(100), np.random.randn(10)
+```
+
+A primeira instrução define a semente do gerador de números aleatórios NumPy com [seed()](https://docs.scipy.org/doc/numpy-1.16.0/reference/generated/numpy.random.seed.html), para que você possa obter os mesmos resultados toda vez que executar o código. Você não precisa definir a semente, mas se não especificar esse valor, obterá resultados diferentes a cada vez.
+
+As outras instruções geram três arrays NumPy com pseudo-distribuição normal números aleatórios. x refere-se à matriz com 1.000 itens, y possui 100 e z contém 10 itens. Agora que você tem os dados para trabalhar, você pode aplicar [.boxplot()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.boxplot.html) para obter o gráfico de caixa:
+
+```python
+fig, ax = plt.subplots()
+
+ax.boxplot((x, y, z), vert=False, showmeans=True, meanline=True,
+           labels=('x', 'y', 'z'), patch_artist=True,
+           medianprops={'linewidth': 2, 'color': 'purple'},
+           meanprops={'linewidth': 2, 'color': 'red'})
+
+plt.show()
+```
+
+Os parâmetros de `.boxplot()` definem o seguinte:
+
+> ° **x** são seus dados.
+> 
+> ° **vert** define a orientação da plotagem para horizontal quando `False`. A orientação padrão é vertical.
+> 
+> ° **showmeans** mostra a média de seus dados quando True.
+> 
+> ° **meanline** representa a média como uma linha quando True. A representação padrão é um ponto.
+> 
+> ° **rótulos**: os rótulos de seus dados.
+> 
+> ° **patch_artist** determina como desenhar o gráfico.
+> 
+> ° **medianprops** denota as propriedades da linha que representa a mediana.
+> 
+> ° **meanprops** indica as propriedades da linha ou ponto que representa a média.
+
+Existem outros parâmetros, mas sua análise está além do escopo deste tutorial.
+
+O código acima produz uma imagem como esta:
+
+![img1](https://files.realpython.com/media/py-stats-09.bbe925f1a3e3.png)
+
+Você pode ver três gráficos de caixa. Cada um deles corresponde a um único conjunto de dados (x, y ou z) e mostra o seguinte:
+
+> ° **A média** é a linha tracejada vermelha.
+> ° **A mediana** é a linha roxa.
+> ° **O primeiro** quartil é a borda esquerda do retângulo azul.
+> ° **O terceiro** quartil é a borda direita do retângulo azul.
+> ° **O intervalo** interquartil é o comprimento do retângulo azul.
+> ° **O intervalo** contém tudo da esquerda para a direita.
+> ° **Os outliers** são os pontos à esquerda e à direita.
+
+Um gráfico de caixa pode mostrar tanta informação em uma única figura!
