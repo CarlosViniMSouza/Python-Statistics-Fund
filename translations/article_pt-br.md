@@ -1712,3 +1712,24 @@ Este código produz a seguinte figura:
 ![img2](https://files.realpython.com/media/py-stats-11.2d63bac53eb9.png)
 
 Mostra o histograma com os valores cumulativos. A frequência do primeiro e mais à esquerda é o número de itens neste compartimento. A frequência do segundo compartimento é a soma dos números de itens no primeiro e segundo compartimentos. As demais caixas seguem esse mesmo padrão. Finalmente, a frequência do último e mais à direita bin é o número total de itens no conjunto de dados (neste caso, 1000). Você também pode desenhar um histograma diretamente com [pd.Series.hist()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.hist.html) usando `matplotlib` em segundo plano.
+
+## Gráfico de setores
+
+Os **gráficos de pizza** representam dados com um pequeno número de rótulos e frequências relativas dadas. Eles funcionam bem mesmo com os rótulos que não podem ser ordenados (como dados nominais). Um gráfico de pizza é um círculo dividido em várias fatias. Cada fatia corresponde a um único rótulo distinto do conjunto de dados e possui uma área proporcional à frequência relativa associada a esse rótulo.
+
+Vamos definir dados associados a três rótulos, e criar um gráfico de pizza com [.pie()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pie.html):
+
+```python
+x, y, z = 128, 256, 1024
+
+fig, ax = plt.subplots()
+ax.pie((x, y, z), labels=('x', 'y', 'z'), autopct='%1.1f%%')
+
+plt.show()
+```
+
+O primeiro argumento de `.pie()` são seus dados e o segundo é a sequência dos rótulos correspondentes. `autopct` define o formato das frequências relativas mostradas na figura. Você obterá uma figura parecida com esta:
+
+![img1](https://files.realpython.com/media/py-stats-12.85291860060a.png)
+
+O gráfico de pizza mostra `x` como a menor parte do círculo, `y` como a próxima maior e `z` como a maior parte. As porcentagens denotam o tamanho relativo de cada valor comparado à sua soma.
