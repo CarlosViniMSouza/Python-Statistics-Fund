@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Topic: Visualizing Data | Sub-Topic: HeatMaps -> created & added | Next Sub-Topic: Conclusion"
+git commit -m "Topic: Conclusion -> created & added"
 git push
 git status

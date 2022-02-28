@@ -1856,3 +1856,19 @@ O resultado é a figura abaixo:
 ![img2](https://files.realpython.com/media/py-stats-16.c0240902890d.png)
 
 A cor amarela representa o valor 1.0 e a cor roxa mostra o valor 0.99.
+
+## Conclusão
+
+Agora você conhece as quantidades que descrevem e resumem conjuntos de dados e como calculá-los em Python. É possível obter **estatísticas descritivas** com código Python puro, mas isso raramente é necessário. Normalmente, você usará algumas das bibliotecas criadas especialmente para esse fim:
+
+> ° **Use Python’s statistics** para as funções estatísticas mais importantes do Python
+> 
+> ° **Use NumPy** para lidar com matrizes de forma eficiente.
+> 
+> ° **Use SciPy** para rotinas estatísticas adicionais do Python para matrizes NumPy
+> 
+> ° **Use Pandas** para trabalhar com conjuntos de dados rotulados.
+> 
+> ° **Use Matplotlib** para visualizar dados com gráficos, gráficos e histogramas.
+
+Na era do big data e da inteligência artificial, é preciso saber calcular medidas estatísticas descritivas. Agora você está pronto para mergulhar mais fundo no mundo da [ciência de dados](https://realpython.com/tutorials/data-science/) e [aprendizado de máquina](https://realpython.com/tutorials/machine-learning/)!
