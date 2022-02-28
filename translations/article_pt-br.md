@@ -1570,6 +1570,7 @@ Agora, você tem `matplotlib.pyplot` importado e pronto para uso. A segunda inst
 Você usará [números pseudo-aleatórios](https://realpython.com/courses/generating-random-data-python/) para obter dados para trabalhar. Você não precisa de conhecimento sobre [números aleatórios](https://realpython.com/lessons/randomness-modeling-and-simulation/) para poder entender esta seção. Você só precisa de alguns números arbitrários, e geradores pseudo-aleatórios são uma ferramenta conveniente para obtê-los. O módulo [np.random](https://docs.scipy.org/doc/numpy-1.16.0/reference/routines.random.html) gera arrays de números pseudo-aleatórios:
 
 > ° [Números normalmente distribuídos](https://en.wikipedia.org/wiki/Normal_distribution) são gerados com [np.random.randn()](https://docs.scipy.org/doc/numpy-1.16.0/reference/generated/numpy.random.randn.html).
+> 
 > ° [Inteiros uniformemente distribuídos](https://en.wikipedia.org/wiki/Discrete_uniform_distribution) são gerados com [np.random.randint()](https://docs.scipy.org/doc/numpy-1.16.0/reference/generated/numpy.random.randint.html).
 
 O NumPy 1.17 introduziu outro [módulo](https://numpy.org/devdocs/release/1.17.0-notes.html#new-extensible-numpy-random-module-with-selectable-random-number-generators) para geração de números pseudo-aleatórios. Para saber mais sobre isso, consulte a [documentação oficial](https://docs.scipy.org/doc/numpy/reference/random/generator.html).
@@ -1626,11 +1627,88 @@ O código acima produz uma imagem como esta:
 Você pode ver três gráficos de caixa. Cada um deles corresponde a um único conjunto de dados (x, y ou z) e mostra o seguinte:
 
 > ° **A média** é a linha tracejada vermelha.
+> 
 > ° **A mediana** é a linha roxa.
+> 
 > ° **O primeiro** quartil é a borda esquerda do retângulo azul.
+> 
 > ° **O terceiro** quartil é a borda direita do retângulo azul.
+> 
 > ° **O intervalo** interquartil é o comprimento do retângulo azul.
+> 
 > ° **O intervalo** contém tudo da esquerda para a direita.
+> 
 > ° **Os outliers** são os pontos à esquerda e à direita.
 
 Um gráfico de caixa pode mostrar tanta informação em uma única figura!
+
+## Histogramas
+
+Os [histogramas](https://realpython.com/python-histograms/) são particularmente úteis quando há um grande número de valores exclusivos em um conjunto de dados. O histograma divide os valores de um conjunto de dados classificado em intervalos, também chamados de **compartimentos**. Muitas vezes, todos os compartimentos têm a mesma largura, embora isso não precise ser o caso. Os valores dos limites inferior e superior de uma caixa são chamados de **arestas da caixa**.
+
+A **frequência** é um valor único que corresponde a cada bin. É o número de elementos do conjunto de dados com os valores entre as bordas do bin. Por convenção, todos os compartimentos, exceto o mais à direita, estão entreabertos. Eles incluem os valores iguais aos limites inferiores, mas excluem os valores iguais aos limites superiores. O compartimento mais à direita está fechado porque inclui ambos os limites. Se você dividir um conjunto de dados com as bordas do compartimento 0, 5, 10 e 15, haverá três compartimentos:
+
+1. **O primeiro e mais à esquerda** contém os valores maiores ou iguais a 0 e menores que 5.
+
+2. **O segundo compartimento** contém os valores maiores ou iguais a 5 e menores que 10.
+
+3. **O terceiro compartimento mais à direita** contém os valores maiores ou iguais a 10 e menores ou iguais a 15.
+
+A função [np.histogram()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram.html) é uma maneira conveniente de obter dados para histogramas:
+
+```python
+hist, bin_edges = np.histogram(x, bins=10)
+
+print(hist)
+# output: array([  9,  20,  70, 146, 217, 239, 160,  86,  38,  15])
+
+print(bin_edges)
+"""
+output:
+
+array([-3.04614305, -2.46559324, -1.88504342, -1.3044936 , -0.72394379,
+       -0.14339397,  0.43715585,  1.01770566,  1.59825548,  2.1788053 ,
+        2.75935511])
+"""
+```
+
+Ele pega o array com seus dados e o número (ou arestas) de bins e retorna dois arrays NumPy:
+
+1. **hist** contém a frequência ou o número de itens correspondentes a cada bin.
+2. **bin_edges** contém as arestas ou limites do bin.
+
+O que `histogram()` calcula, [.hist()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.hist.html) pode mostrar graficamente:
+
+```python
+figure, ax = plt.subplots()
+
+ax.hist(x, bin_edges, cumulative=False)
+ax.set_xlabel('x')
+ax.set_ylabel('Frequency')
+
+plt.show()
+```
+
+O primeiro argumento de `.hist()` é a sequência com seus dados. O segundo argumento define as bordas dos compartimentos. O terceiro desabilita a opção de criar um histograma com valores cumulativos. O código acima produz uma figura como esta:
+
+![img1](https://files.realpython.com/media/py-stats-10.47c60c3e5c75.png)
+
+Você pode ver as bordas do compartimento no eixo horizontal e as frequências no eixo vertical.
+
+É possível obter o histograma com os números cumulativos de itens se você fornecer o argumento `cumulative=True` para `.hist()`:
+
+```python
+fig, ax = plt.subplots()
+
+ax.hist(x, bin_edges, cumulative=True)
+ax.set_xlabel('x')
+ax.set_ylabel('Frequency')
+
+plt.show()
+```
+
+Este código produz a seguinte figura:
+
+![img2](https://files.realpython.com/media/py-stats-11.2d63bac53eb9.png)
+
+Mostra o histograma com os valores cumulativos. A frequência do primeiro e mais à esquerda é o número de itens neste compartimento. A frequência do segundo compartimento é a soma dos números de itens no primeiro e segundo compartimentos. As demais caixas seguem esse mesmo padrão. Finalmente, a frequência do último e mais à direita bin é o número total de itens no conjunto de dados (neste caso, 1000). Você também pode desenhar um histograma diretamente com [pd.Series.hist()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.hist.html) usando `matplotlib` em segundo plano.

@@ -692,4 +692,34 @@ ax.boxplot((x, y, z), vert=False, showmeans=True, meanline=True,
 
 plt.show()
 
-# TODO: Histograms is the next sub-topic.
+hist, bin_edges = np.histogram(x, bins=10)
+
+print(hist)
+# output: array([  9,  20,  70, 146, 217, 239, 160,  86,  38,  15])
+
+print(bin_edges)
+"""
+output:
+
+array([-3.04614305, -2.46559324, -1.88504342, -1.3044936 , -0.72394379,
+       -0.14339397,  0.43715585,  1.01770566,  1.59825548,  2.1788053 ,
+        2.75935511])
+"""
+
+fig, ax = plt.subplots()
+
+ax.hist(x, bin_edges, cumulative=False)
+ax.set_xlabel('x')
+ax.set_ylabel('Frequency')
+
+plt.show()
+
+fig, ax = plt.subplots()
+
+ax.hist(x, bin_edges, cumulative=True)
+ax.set_xlabel('x')
+ax.set_ylabel('Frequency')
+
+plt.show()
+
+# TODO: Pie Charts is the next sub-topic.
