@@ -729,4 +729,16 @@ ax.pie((x, y, z), labels=('x', 'y', 'z'), autopct='%1.1f%%')
 
 plt.show()
 
-# TODO: Bar Charts is the next sub-topic.
+x = np.arange(21)
+y = np.random.randint(21, size=21)
+err = np.random.randn(21)
+
+fig, ax = plt.subplots()
+
+ax.bar(x, y, yerr=err)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+
+plt.show()
+
+# TODO: X-Y Plots is the next sub-topic.

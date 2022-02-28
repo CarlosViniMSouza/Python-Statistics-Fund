@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Topic: Visualizing Data | Sub-Topic: Pie Charts -> created & added | Next Sub-Topic: Bar Charts"
+git commit -m "Topic: Visualizing Data | Sub-Topic: Bar Charts -> created & added | Next Sub-Topic: X-Y Plots"
 git push
 git status

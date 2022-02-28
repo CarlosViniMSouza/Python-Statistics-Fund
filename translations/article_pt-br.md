@@ -1733,3 +1733,35 @@ O primeiro argumento de `.pie()` são seus dados e o segundo é a sequência dos
 ![img1](https://files.realpython.com/media/py-stats-12.85291860060a.png)
 
 O gráfico de pizza mostra `x` como a menor parte do círculo, `y` como a próxima maior e `z` como a maior parte. As porcentagens denotam o tamanho relativo de cada valor comparado à sua soma.
+
+## Gráficos de barra
+
+Os **gráficos de barras** também ilustram dados que correspondem a determinados rótulos ou valores numéricos discretos. Eles podem mostrar os pares de dados de dois conjuntos de dados. Os itens de um conjunto são os **rótulos**, enquanto os itens correspondentes do outro são suas **frequências**. Opcionalmente, eles também podem mostrar os erros relacionados às frequências.
+
+O gráfico de barras mostra retângulos paralelos chamados **barras**. Cada barra corresponde a uma única etiqueta e tem uma altura proporcional à frequência ou frequência relativa da sua etiqueta. Vamos gerar três conjuntos de dados, cada um com 21 itens:
+
+```python
+x = np.arange(21)
+y = np.random.randint(21, size=21)
+err = np.random.randn(21)
+```
+
+Você usa [np.arange()](https://realpython.com/how-to-use-numpy-arange/) para obter `x`, ou a matriz de inteiros consecutivos de 0 a 20. Você usará isso para representar os rótulos. `y` é um array de inteiros aleatórios uniformemente distribuídos, também entre 0 e 20. Este array representará as frequências. `err` contém números de ponto flutuante normalmente distribuídos, que são os erros. Esses valores são opcionais.
+
+Você pode criar um gráfico de barras com [.bar()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.bar.html) se quiser barras verticais ou [.barh()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.barh.html) se quiser barras horizontais:
+
+```python
+fig, ax = plt.subplots()
+
+ax.bar(x, y, yerr=err)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+
+plt.show()
+```
+
+Esse código deve produzir a seguinte imagem:
+
+![img1](https://files.realpython.com/media/py-stats-13.86e4d6acf1bd.png)
+
+As alturas das barras vermelhas correspondem às frequências y, enquanto os comprimentos das linhas pretas mostram os erros `err`. Se você não quiser incluir os erros, omita o parâmetro `yerr` de `.bar()`.
