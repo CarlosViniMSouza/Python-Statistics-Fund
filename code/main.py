@@ -741,4 +741,19 @@ ax.set_ylabel('y')
 
 plt.show()
 
+x, y = np.arange(21), (5 + 2 * x + 2) * np.random.randn(21)
+slope, intercept, r, *__ = scipy.stats.linregress(x, y)
+line = f'Regression Line: y={intercept: .2f} + {slope: .2f}x, r={r: .2f}'
+
+fig, ax = plt.subplots()
+
+ax.plot(x, y, linewidth=0, marker='s', label='Data points')
+ax.plot(x, intercept + slope * x, label=line)
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.legend(facecolor='white')
+
+plt.show()
+
 # TODO: X-Y Plots is the next sub-topic.

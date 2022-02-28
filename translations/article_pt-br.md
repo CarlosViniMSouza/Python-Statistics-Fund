@@ -1765,3 +1765,36 @@ Esse código deve produzir a seguinte imagem:
 ![img1](https://files.realpython.com/media/py-stats-13.86e4d6acf1bd.png)
 
 As alturas das barras vermelhas correspondem às frequências y, enquanto os comprimentos das linhas pretas mostram os erros `err`. Se você não quiser incluir os erros, omita o parâmetro `yerr` de `.bar()`.
+
+## X-Y Plots
+
+O `gráfico x-y` ou `gráfico de dispersão` representa os pares de dados de dois conjuntos de dados. O eixo x horizontal mostra os valores do conjunto x, enquanto o eixo y vertical mostra os valores correspondentes do conjunto y. Opcionalmente, você pode incluir a linha de regressão e o coeficiente de correlação. Vamos gerar dois conjuntos de dados e realizar a regressão linear com `scipy.stats.linregress()`:
+
+```python
+x, y = np.arange(21), (5 + 2 * x + 2) * np.random.randn(21)
+slope, intercept, r, *__ = scipy.stats.linregress(x, y)
+line = f'Regression Line: y={intercept: .2f} + {slope: .2f}x, r={r: .2f}'
+```
+
+O conjunto de dados x é novamente a matriz com os inteiros de 0 a 20. y é calculado como uma função linear de x distorcida com algum ruído aleatório.
+
+`linregress` retorna vários valores. Você precisará da `inclinação` e da `interceptação` da linha de regressão, bem como do coeficiente de correlação `r`. Então você pode aplicar [.plot()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.plot.html) para obter o gráfico x-y:
+
+```python
+fig, ax = plt.subplots()
+
+ax.plot(x, y, linewidth=0, marker='s', label='Data points')
+ax.plot(x, intercept + slope * x, label=line)
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.legend(facecolor='white')
+
+plt.show()
+```
+
+O resultado do código acima é esta figura:
+
+![img1](https://files.realpython.com/media/py-stats-14.33b9d9b32eb4.png)
+
+Você pode ver os pontos de dados (pares x-y) como quadrados vermelhos, bem como a linha de regressão azul.
