@@ -1798,3 +1798,61 @@ O resultado do código acima é esta figura:
 ![img1](https://files.realpython.com/media/py-stats-14.33b9d9b32eb4.png)
 
 Você pode ver os pontos de dados (pares x-y) como quadrados vermelhos, bem como a linha de regressão azul.
+
+## Mapas de Calor
+
+Um **mapa de calor** pode ser usado para mostrar visualmente uma matriz. As cores representam os números ou elementos da matriz. Os mapas de calor são particularmente úteis para ilustrar as matrizes de covariância e correlação. Você pode criar o mapa de calor para uma matriz de covariância com [.imshow()](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.imshow.html):
+
+```python
+matrix = np.cov(x, y).round(decimals=2)
+
+fig, ax = plt.subplots()
+
+ax.imshow(matrix)
+ax.grid(False)
+
+ax.xaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+ax.yaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+
+ax.set_ylim(1.5, -0.5)
+
+for i in range(2):
+    for j in range(2):
+        ax.text(j, i, matrix[i, j], ha='center', va='center', color='w')
+
+plt.show()
+```
+
+Aqui, o mapa de calor contém os rótulos `x` e `y`, bem como os números da matriz de covariância. Você obterá uma figura como esta:
+
+![img1](https://files.realpython.com/media/py-stats-15.432905d1b05a.png)
+
+O campo amarelo representa o maior elemento da matriz 130,34, enquanto o roxo corresponde ao menor elemento 38,5. Os quadrados azuis entre eles estão associados ao valor 69,9.
+
+Você pode obter o mapa de calor para a matriz do coeficiente de correlação seguindo a mesma lógica:
+
+```python
+matrix = np.corrcoef(x, y).round(decimals=2)
+
+fig, ax = plt.subplots()
+
+ax.imshow(matrix)
+ax.grid(True)  # The default is False
+
+ax.xaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+ax.yaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+
+ax.set_ylim(1.5, -0.5)
+
+for i in range(2):
+    for j in range(2):
+        ax.text(j, i, matrix[i, j], ha='center', va='center', color='w')
+
+plt.show()
+```
+
+O resultado é a figura abaixo:
+
+![img2](https://files.realpython.com/media/py-stats-16.c0240902890d.png)
+
+A cor amarela representa o valor 1.0 e a cor roxa mostra o valor 0.99.

@@ -756,4 +756,40 @@ ax.legend(facecolor='white')
 
 plt.show()
 
-# TODO: X-Y Plots is the next sub-topic.
+matrix = np.cov(x, y).round(decimals=2)
+
+fig, ax = plt.subplots()
+
+ax.imshow(matrix)
+ax.grid(False)
+
+ax.xaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+ax.yaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+
+ax.set_ylim(1.5, -0.5)
+
+for i in range(2):
+    for j in range(2):
+        ax.text(j, i, matrix[i, j], ha='center', va='center', color='w')
+
+plt.show()
+
+matrix = np.corrcoef(x, y).round(decimals=2)
+
+fig, ax = plt.subplots()
+
+ax.imshow(matrix)
+ax.grid(True)  # The default is False
+
+ax.xaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+ax.yaxis.set(ticks=(0, 1), ticklabels=('x', 'y'))
+
+ax.set_ylim(1.5, -0.5)
+
+for i in range(2):
+    for j in range(2):
+        ax.text(j, i, matrix[i, j], ha='center', va='center', color='w')
+
+plt.show()
+
+# TODO: Heatmaps is the next sub-topic.
